@@ -1,20 +1,19 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
+import usePoll from '../../hooks/usePoll';
+import FeedPage from './FeedPage';
+import PollPage from './PollPage';
 
 export default function HomePage () {
 
     const [user, setUser] = useUser()
+    const [poll, setPoll] = usePoll()
 
     if(!user) return <Logo>대기중</Logo>
-    
-    return (
-        <MainContainer>
-            <Logo>{user.age}</Logo>
-            <Logo onClick={()=>{
-                setUser({...user, age: user.age+1})
-            }}>1 상승</Logo>
-        </MainContainer>
-    );
+
+
+    if(!poll) return <FeedPage />
+    else return <PollPage />
 }
 
 const Logo = styled.div`
@@ -49,3 +48,5 @@ const MainContainer = styled.div`
     align-items: center;
     color: #000;
 `
+
+export {Logo, SubText, SubjectText, MainContainer}
