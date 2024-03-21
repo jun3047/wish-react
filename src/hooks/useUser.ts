@@ -26,7 +26,8 @@ const useUser = () => {
         // 앱의 변화를 인식
         const handleAppMessage = (event: MessageEvent) => {
 
-            if(event?.data && !event.data.startsWith(APP_SYNC_ACTION)) return;
+            if(!event?.data) return;
+            if(!event.data.startsWith(APP_SYNC_ACTION)) return;
 
             const appData = JSON.parse(event.data.replace(APP_SYNC_ACTION, ''))
 
