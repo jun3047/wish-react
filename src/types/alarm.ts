@@ -1,7 +1,7 @@
-import { ServerUserType } from "./user";
+import { SimpleUserType } from "./user";
 
 export type AlarmType = {
     id: number;
     question: string;
-    asker: ServerUserType;
+    asker: SimpleUserType;
 }

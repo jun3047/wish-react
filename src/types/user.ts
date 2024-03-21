@@ -1,47 +1,31 @@
-export type IRequestFriendInfo = {
-    token: string;
-    gender: "boy" | "girl";
-    id: number;
-    name: string;
-    age: number;
-    school: string;
-    schoolLocation: string;
-    friendIds: number[];
-}
+import { AlarmType } from "./alarm";
 
-export type UserType = {
+export interface UserType {
     id: number;
     token: string;
     name: string;
     age: number;
     phone: string;
-    gender: "boy" | "girl";
-    friendIds: number[];
-    feedIds: number[];
+    gender: "남자" | "여자";
+    feedIds: number[] | null;
     school?: string;
     schoolLocation?: string;
-    requestFriendInfos: IRequestFriendInfo[];
-    addFriendIds: number[];
+    friends: SimpleUserType[] | null;
+
+    requestFriends: SimpleUserType[]; //local only
+    receivedFriends: SimpleUserType[]; //local only
+    alarms: AlarmType[] //local only
 }
 
-export interface FeedUserType {
-    id: number;
-    name: string;
-    token: string;
-    age: number;
-    school?: string;
-    schoolLocation?: string;
-}
-
-export interface ServerUserType {
+//다른 객체의 하위로 들어갈 때 사용
+export interface SimpleUserType {
     id: number;
     token: string;
     name: string;
     age: number;
     phone: string;
-    gender: "boy" | "girl";
-    friendIds: number[];
-    feedIds: number[];
+    gender: "남자" | "여자";
+    feedIds: number[] | null;
     school?: string;
     schoolLocation?: string;
 }
