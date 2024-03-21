@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import ProfilePage from '../pages/ProfilePage';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const FriendPage = lazy(() => import('../pages/FriendPage'));
@@ -14,6 +15,10 @@ const Router = () => {
         <Route
           path="/home"
           element={<HomePage />}
+        />
+        <Route
+          path="/profile/:id"
+          element={<ProfilePage />}
         />
         <Route
           path="/friend"
