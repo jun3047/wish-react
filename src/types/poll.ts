@@ -1,4 +1,4 @@
-export type PollType = {
+export interface PollType {
     question: string;
     nextTime: string;
 }
