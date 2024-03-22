@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import useUser from '../hooks/useUser';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const FriendPage = lazy(() => import('../pages/FriendPage'));
@@ -8,6 +9,10 @@ const MyPage = lazy(() => import('../pages/MyPage'));
 const ProfilePage = lazy(() => import('../pages/ProfilePage'));
 
 const Router = () => {
+
+  const [user, setUser] = useUser()
+
+  if(!user) return <div>대기중</div>
 
   return (
     <Suspense fallback={<>loading</>}>
@@ -22,11 +27,11 @@ const Router = () => {
         />
         <Route
           path="/friend"
-          element={<FriendPage />}
+          element={<FriendPage user={user}/>}
         />
         <Route
           path="/alarm"
-          element={<AlarmPage />}
+          element={<AlarmPage  user={user}/>}
         />
         <Route
           path="/my"
