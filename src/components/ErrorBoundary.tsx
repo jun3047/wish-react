@@ -35,7 +35,11 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   renderContent() {
-    if (this.state.hasError || !this.state.isOnline) {
+    if (this.state.hasError) {
+      return <Logo>이상이 생겼어요 앱을 다시 열어주세요 😭</Logo>;
+    }
+
+    if(!this.state.isOnline) {
       return <Logo>네트워크를 연결해주세요</Logo>;
     }
     return this.props.children;
