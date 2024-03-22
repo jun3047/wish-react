@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import useUser from '../hooks/useUser';
+import { UserType } from '../types/user';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const FriendPage = lazy(() => import('../pages/FriendPage'));
@@ -11,6 +12,8 @@ const ProfilePage = lazy(() => import('../pages/ProfilePage'));
 const Router = () => {
 
   const [user, setUser] = useUser()
+
+  const updateUser = (userInfo: UserType) =>  setUser(userInfo)
 
   if(!user) return <div>대기중</div>
 
@@ -27,11 +30,11 @@ const Router = () => {
         />
         <Route
           path="/friend"
-          element={<FriendPage user={user}/>}
+          element={<FriendPage user={user} setUser={updateUser}/>}
         />
         <Route
           path="/alarm"
-          element={<AlarmPage  user={user}/>}
+          element={<AlarmPage  user={user} setUser={updateUser}/>}
         />
         <Route
           path="/my"

@@ -3,13 +3,41 @@ import useUser from '../../hooks/useUser';
 import usePoll from '../../hooks/usePoll';
 import FeedPage from './FeedPage';
 import PollPage from './PollPage';
+import handleNative from '../../native';
+
+const MIN_FRIENDS = 4
 
 export default function HomePage () {
 
-    const [poll, setPoll] = usePoll()
+    const [poll, setPoll, scheduleNextPoll] = usePoll()
+    const [user, setUser] = useUser()
 
-    if(!poll?.question) return <FeedPage />
-    else return <PollPage />
+    if(!user) return <Logo>대기중</Logo>
+
+    if(!user.friends || user.friends.length < MIN_FRIENDS) {
+        return <NoFirendPage />
+    }
+
+    if(!poll?.question) {
+        return <FeedPage user={user}/>
+    }
+
+    return <PollPage />
+}
+
+const NoFirendPage = () => {
+
+    const goToFriendPage = () => {
+        handleNative('탭이동', 'friend')
+    }
+
+    return (
+        <MainContainer>
+            <Logo>투표 페이지</Logo>
+            <Logo>친구가 없습니다.</Logo>
+            <Logo onClick={goToFriendPage}>친구 추가하러 가기</Logo>
+        </MainContainer>
+    )
 }
 
 const Logo = styled.div`

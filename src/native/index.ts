@@ -17,7 +17,7 @@ declare global {
 // handleNative('진동')
 // handleNative('인스타')
 
-type NativeType = '연락처' | '앱동기화' | '로컬푸시' | '푸시' | '프로필이동' | '카메라' | '알람' | '진동' | '인스타'
+type NativeType = '탭이동' | '연락처' | '앱동기화' | '로컬푸시' | '푸시' | '프로필이동' | '카메라' | '알람' | '진동' | '인스타'
 
 const handleNative = (type: NativeType, data?: string) => {
     window.ReactNativeWebView.postMessage(type + (data ? data : ''));
