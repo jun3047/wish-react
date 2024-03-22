@@ -2,9 +2,8 @@ import { pollState } from "../recoils"
 import { useEffect } from "react"
 import { useRecoilState } from "recoil"
 import { PollType } from "../types/poll";
-
-// @ts-ignore
-const handleNative = (type: string) => window.ReactNativeWebView.postMessage(type);
+import randomQuestion from "../pages/HomePage/PollData";
+import handleNative from "../native";
 
 const POLL_INFO_KEY = 'pollInfo';
 const APP_SYNC_ACTION = '앱동기화';
@@ -57,10 +56,37 @@ const usePoll = () => {
 
         if(fromApp) return;
 
-        handleNative(`${APP_SYNC_ACTION}${pollDataString}`);
+        handleNative(APP_SYNC_ACTION, pollDataString);
     };
 
-    return [poll, updateData] as const;
+
+    const scheduleNextPoll = () => {
+
+        if(!poll) return;
+
+        const newQuestion = randomQuestion(poll.question)
+        const newPoll = {
+            question: newQuestion,
+            nextTime: 0,
+        }
+        
+        const content = JSON.stringify({
+            title: '새로운 질문이 도착했어요',
+            body: '친구들 중 한명에게 투표해봐요',
+            data: {
+                pollInfo: newPoll
+            }
+        })
+
+        handleNative('로컬푸시', content)
+
+        setPoll({
+            question: '',
+            nextTime: ''
+        })
+    }
+
+    return [poll, updateData, scheduleNextPoll] as const;
 };
 
 export default usePoll
