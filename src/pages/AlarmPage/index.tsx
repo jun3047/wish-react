@@ -1,13 +1,16 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
 import handleNative from '../../native';
+import { UserType } from '../../types/user';
 
-export default function AlarmPage () {
+export default function AlarmPage ({
+    user,
+    setUser
+}:{
+    user: UserType,
+    setUser: (user: UserType) => void
+}) {
 
-    const [user, setUser] = useUser()
-
-    if(!user) return <Logo>대기중</Logo>
-    
     return (
         <MainContainer>
             <Logo>{user.age}</Logo>
@@ -20,9 +23,7 @@ export default function AlarmPage () {
                 }
                 handleNative('카메라', JSON.stringify(data))
             }}>카메라</Logo>
-            <Logo onClick={()=>{
-                setUser({...user, age: user.age+1})
-            }}>1 상승</Logo>
+            <Logo>{user.alarms.length}</Logo>
         </MainContainer>
     );
 }

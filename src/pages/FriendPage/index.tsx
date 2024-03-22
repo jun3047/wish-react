@@ -1,19 +1,32 @@
 import styled from '@emotion/styled'
-import useUser from '../../hooks/useUser';
 import useRecommendFriends from '../../apis/queries/useRecommendFriends';
-import useContacts from '../../hooks/useContacts';
 import { UserType } from '../../types/user';
+import { friendApi } from '../../apis';
+import makeUserSimple from '../../utils/MakeUserSimple';
 
-export default function FriendPage ({user}:{user: UserType}) {
+export default function FriendPage ({
+    user,
+    setUser
+}:{
+    user: UserType,
+    setUser: (user: UserType) => void
+}) {
 
     const {data} = useRecommendFriends(user)
 
     return (
         <MainContainer>
-            {/* <Logo>{data[0].name}</Logo> */}
-            {/* <Logo>친구 목록 {data[0].id}</Logo> */}
-            <Logo>요청 상승</Logo>
-            <Logo>추가 상승</Logo>
+            <Logo>{data.length}</Logo>
+            <Logo onClick={()=>{
+                friendApi.beFriend(makeUserSimple(user), data[0])
+                setUser({
+                    ...user,
+                    friends: user.friends ?
+                    [...user.friends, data[0]]:
+                    [data[0]]
+                })
+            }}
+            >친구 수릭</Logo>
         </MainContainer>
     );
 }

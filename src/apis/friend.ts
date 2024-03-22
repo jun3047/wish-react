@@ -17,7 +17,11 @@ interface FriendApiType {
 }
 
 const friendApi: FriendApiType = {
-  beFriend: (user, targetUser) => request.post('/friend', {user, targetUser}),
+  beFriend: (user, targetUser) => {
+
+    //TODO: validation
+    return request.post('/friend', {user, targetUser})
+  },
   getRecommendFriends: userInfo => request.post(`/friend/recommend`, userInfo)
 };
 

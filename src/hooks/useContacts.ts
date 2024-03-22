@@ -18,8 +18,6 @@ const useContacts = () => {
 
             const appData = JSON.parse(event.data.replace('연락처', ''))
 
-            alert(appData)
-
             setContacts(appData)
         }
 
