@@ -7,10 +7,10 @@ export interface UserType {
     age: number;
     phone: string;
     gender: "남자" | "여자";
-    feedIds: number[] | null;
+    feedIds: number[] | [];
     school?: string;
     schoolLocation?: string;
-    friends: SimpleUserType[] | null;
+    friends: SimpleUserType[] | [];
 
     requestFriends: SimpleUserType[]; //local only
     receivedFriends: SimpleUserType[]; //local only
