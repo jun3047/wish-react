@@ -80,10 +80,10 @@ const usePoll = () => {
 
         handleNative('로컬푸시', content)
 
-        setPoll({
+        updateData({
             question: '',
             nextTime: ''
-        })
+        }, false)
     }
 
     return [poll, updateData, scheduleNextPoll] as const;
