@@ -1,19 +1,19 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
+import useRecommendFriends from '../../apis/queries/useRecommendFriends';
+import useContacts from '../../hooks/useContacts';
+import { UserType } from '../../types/user';
 
-export default function FriendPage () {
+export default function FriendPage ({user}:{user: UserType}) {
 
-    const [user, setUser] = useUser()
+    const {data} = useRecommendFriends(user)
 
-    if(!user) return <Logo>대기중</Logo>
-    
     return (
         <MainContainer>
-            <Logo>{user.age}</Logo>
-            <Logo>친구</Logo>
-            <Logo onClick={()=>{
-                setUser({...user, age: user.age+1})
-            }}>1 상승</Logo>
+            {/* <Logo>{data[0].name}</Logo> */}
+            {/* <Logo>친구 목록 {data[0].id}</Logo> */}
+            <Logo>요청 상승</Logo>
+            <Logo>추가 상승</Logo>
         </MainContainer>
     );
 }
