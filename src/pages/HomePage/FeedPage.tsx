@@ -1,8 +1,6 @@
 import { Logo, MainContainer } from "."
 import useUser from "../../hooks/useUser"
-
-// @ts-ignore
-const handleNative = (type: string) => window.ReactNativeWebView.postMessage(type);
+import handleNative from "../../native"
 
 export default function FeedPage () {
 
@@ -14,7 +12,7 @@ export default function FeedPage () {
         <MainContainer>
             <Logo>피드 페이지</Logo>
             <Logo onClick={()=>{
-                handleNative(`프로필이동${1}`)
+                handleNative('프로필이동', '1')
             }}>프로필</Logo>
             <Logo>{user.age}</Logo>
             <Logo>{user.age}</Logo>

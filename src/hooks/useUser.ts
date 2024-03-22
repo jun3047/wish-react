@@ -43,8 +43,9 @@ const useUser = () => {
 
         window.addEventListener('message', handleAppMessage);
         window.addEventListener('storage', handleStorageChange);
-
+        
         return () => {
+            window.removeEventListener('message', handleAppMessage);
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
