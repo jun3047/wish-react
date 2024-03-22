@@ -16,9 +16,9 @@ interface FriendApiType {
   }) => Promise<AxiosResponse<SimpleUserType[]>>;
 }
 
-const userApi: FriendApiType = {
-  beFriend: (user, targetUesr) => request.post('/friend', {user, targetUesr}),
+const friendApi: FriendApiType = {
+  beFriend: (user, targetUser) => request.post('/friend', {user, targetUser}),
   getRecommendFriends: userInfo => request.post(`/friend/recommend`, userInfo)
 };
 
-export default userApi;
+export default friendApi;
