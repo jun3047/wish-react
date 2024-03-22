@@ -32,7 +32,7 @@ const useUser = () => {
 
             const appData = JSON.parse(event.data.replace(APP_SYNC_ACTION, ''))
 
-            if(USER_INFO_KEY in appData && user !== appData[USER_INFO_KEY]){
+            if(USER_INFO_KEY in appData){
 
                 const userData = appData[USER_INFO_KEY];
                 updateData(userData, true);

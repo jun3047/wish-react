@@ -6,13 +6,9 @@ import PollPage from './PollPage';
 
 export default function HomePage () {
 
-    const [user, setUser] = useUser()
     const [poll, setPoll] = usePoll()
 
-    if(!user) return <Logo>대기중</Logo>
-
-
-    if(!poll) return <FeedPage />
+    if(!poll?.question) return <FeedPage />
     else return <PollPage />
 }
 

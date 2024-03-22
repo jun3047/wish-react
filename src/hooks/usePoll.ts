@@ -1,9 +1,7 @@
-import { userState } from "../recoils"
+import { pollState } from "../recoils"
 import { useEffect } from "react"
 import { useRecoilState } from "recoil"
 import { PollType } from "../types/poll";
-import pollState from "../recoils/pollState";
-
 
 // @ts-ignore
 const handleNative = (type: string) => window.ReactNativeWebView.postMessage(type);
@@ -34,7 +32,7 @@ const usePoll = () => {
 
             const appData = JSON.parse(event.data.replace(APP_SYNC_ACTION, ''))
 
-            if(POLL_INFO_KEY in appData && poll !== appData[POLL_INFO_KEY]){
+            if(POLL_INFO_KEY in appData){
 
                 const pollData = appData[POLL_INFO_KEY];
                 updateData(pollData, true);
@@ -45,8 +43,9 @@ const usePoll = () => {
 
         window.addEventListener('message', handleAppMessage);
         window.addEventListener('storage', handleStorageChange);
-
+        
         return () => {
+            window.removeEventListener('message', handleAppMessage);
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
