@@ -4,6 +4,7 @@ import usePoll from '../../hooks/usePoll';
 import FeedPage from './FeedPage';
 import PollPage from './PollPage';
 import handleNative from '../../native';
+import MainBtn from '../../components/MainBtn';
 
 const MIN_FRIENDS = 4
 
@@ -33,17 +34,40 @@ const NoFirendPage = () => {
 
     return (
         <MainContainer>
-            <Logo>투표 페이지</Logo>
-            <Logo>친구가 없습니다.</Logo>
-            <Logo onClick={goToFriendPage}>친구 추가하러 가기</Logo>
+            <NoPageContainer>
+                <Logo>WISH</Logo>
+                <NoText>시작을 위해서</NoText>
+                <NoText>4명 이상의 친구가 필요해요</NoText>
+                <MainBtn onClick={goToFriendPage}>추천 친구 보기</MainBtn>
+            </NoPageContainer>  
         </MainContainer>
     )
 }
 
+
+// 안내문구
+
 const Logo = styled.div`
-    font-size: 2.5rem;
+    position: fixed;
+    top: 3%;
+    font-size: 2rem;
     font-weight: 900;
     color: #ffffff;
+`
+
+const NoText = styled.p`
+    margin-top: 3%;
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #ffffff;
+`
+
+const NoPageContainer = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
 const SubText = styled.div`
@@ -73,4 +97,11 @@ const MainContainer = styled.div`
     color: #000;
 `
 
-export {Logo, SubText, SubjectText, MainContainer}
+export {
+    Logo,
+    SubText,
+    SubjectText,
+    MainContainer,
+    NoText,
+    NoPageContainer
+}

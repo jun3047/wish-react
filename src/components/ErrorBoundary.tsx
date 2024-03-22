@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from '../pages/HomePage';
+import { Logo, MainContainer, NoPageContainer, NoText } from '../pages/HomePage';
 
 interface Props {
   children: React.ReactNode;
@@ -36,11 +36,11 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   renderContent() {
     if (this.state.hasError) {
-      return <Logo>이상이 생겼어요 앱을 다시 열어주세요 😭</Logo>;
+      return <ErrorPage />;
     }
 
     if(!this.state.isOnline) {
-      return <Logo>네트워크를 연결해주세요</Logo>;
+      return <NoNetworkPage />;
     }
     return this.props.children;
   }
@@ -48,6 +48,35 @@ class ErrorBoundary extends React.Component<Props, State> {
   render() {
     return this.renderContent();
   }
+}
+
+const NoNetworkPage = () => {
+
+  return (
+      <MainContainer>
+          <NoPageContainer>
+              <Logo>WISH</Logo>
+              <NoText>📡</NoText>
+              <NoText></NoText>
+              <NoText>네트워크를 연결해주세요</NoText>
+          </NoPageContainer>  
+      </MainContainer>
+  )
+}
+
+const ErrorPage = () => {
+
+  return (
+      <MainContainer>
+          <NoPageContainer>
+              <Logo>WISH</Logo>
+              <NoText>문제가 생겼어요 🤔</NoText>
+              <NoText></NoText>
+              <NoText>다시 시작해도 문제가 계속되면</NoText>
+              <NoText>문의해주세요 😭</NoText>
+          </NoPageContainer>  
+      </MainContainer>
+  )
 }
 
 export default ErrorBoundary;

@@ -1,9 +1,10 @@
 import styled from "@emotion/styled"
-import { Logo, MainContainer } from "."
+import { Logo, MainContainer, NoPageContainer, NoText } from "."
 import useRecommendFeeds from "../../apis/queries/useRecommendFeeds"
 import useUser from "../../hooks/useUser"
 import handleNative from "../../native"
 import { UserType } from "../../types/user"
+import MainBtn from "../../components/MainBtn"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
@@ -33,10 +34,12 @@ const NoFeedPage = () => {
 
     return (
         <MainContainer>
-            <Logo>아직 글이 없어요</Logo>
-            <Logo>알림에서 질문을 눌러 올려봐요</Logo>
-            <Logo onClick={goToAlarmPage}>알림으로 가기</Logo>
-
+            <NoPageContainer>
+                <Logo>WISH</Logo>
+                <NoText>아직 글이 없어요</NoText>
+                <NoText>알림에서 질문을 눌러 올려봐요</NoText>
+                <MainBtn onClick={goToAlarmPage}>알림으로 가기</MainBtn>
+            </NoPageContainer>
         </MainContainer>
     )
 }
