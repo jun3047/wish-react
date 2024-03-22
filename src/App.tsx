@@ -3,13 +3,14 @@ import Router from './routes/Router';
 import { RecoilRoot } from 'recoil';
 import { GlobalStyle } from './styles';
 
+
 function App() {
   return (
     <RecoilRoot>
-      <Suspense fallback={<>loading</>}>
-        <GlobalStyle />
-        <Router />
-      </Suspense>
+        <Suspense fallback={<h1>loading...</h1>}>
+          <GlobalStyle />
+          <Router />
+        </Suspense>
     </RecoilRoot>
   );
 }

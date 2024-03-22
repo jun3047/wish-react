@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
+import handleNative from '../../native';
 
 export default function AlarmPage () {
 
@@ -11,6 +12,14 @@ export default function AlarmPage () {
         <MainContainer>
             <Logo>{user.age}</Logo>
             <Logo>알람</Logo>
+            <Logo onClick={()=>{
+                const data = {
+                    asker: user,
+                    writer: user,
+                    question: "이런거",
+                }
+                handleNative('카메라', JSON.stringify(data))
+            }}>카메라</Logo>
             <Logo onClick={()=>{
                 setUser({...user, age: user.age+1})
             }}>1 상승</Logo>
