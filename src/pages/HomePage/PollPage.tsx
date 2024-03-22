@@ -4,7 +4,7 @@ import useUser from "../../hooks/useUser"
 import handleNative from "../../native"
 import randomQuestion from "./PollData"
 
-export default function FeedPage () {
+export default function PollPage () {
 
     const [user, setUser] = useUser()
     const [poll, setPoll, scheduleNextPoll] = usePoll()
