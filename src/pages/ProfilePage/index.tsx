@@ -1,16 +1,27 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
+import { userApi } from '../../apis';
+import { useEffect } from 'react';
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useParams } from 'react-router-dom';
+import useProfile from '../../apis/queries/useProfile';
 
 export default function ProfilePage () {
 
     const [user, setUser] = useUser()
+    const { id } = useParams() as {id: string}
+    
+    const {data} = useProfile(id)
 
     if(!user) return <Logo>대기중</Logo>
     
     return (
         <MainContainer>
             <Logo>친구리스트</Logo>
-            <p></p>
+            <Logo>{data.id}</Logo>
+            <Logo>{data.feedIds?.length}</Logo>
+            <Logo>{data.school}</Logo>
+            <Logo>{data.friends?.length}</Logo>
             <Logo onClick={()=>{
                 setUser({...user, age: user.age+1})
             }}>1 상승</Logo>

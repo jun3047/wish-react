@@ -12,7 +12,7 @@ export default function FeedPage () {
         <MainContainer>
             <Logo>피드 페이지</Logo>
             <Logo onClick={()=>{
-                handleNative('프로필이동', '1')
+                handleNative('프로필이동', '0')
             }}>프로필</Logo>
             <Logo>{user.age}</Logo>
             <Logo>{user.age}</Logo>

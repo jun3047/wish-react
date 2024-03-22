@@ -1,11 +1,11 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ProfilePage from '../pages/ProfilePage';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const FriendPage = lazy(() => import('../pages/FriendPage'));
 const AlarmPage = lazy(() => import('../pages/AlarmPage'));
 const MyPage = lazy(() => import('../pages/MyPage'));
+const ProfilePage = lazy(() => import('../pages/ProfilePage'));
 
 const Router = () => {
 
