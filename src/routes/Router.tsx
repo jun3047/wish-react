@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import useUser from '../hooks/useUser';
 import { UserType } from '../types/user';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const FriendPage = lazy(() => import('../pages/FriendPage'));
@@ -18,31 +19,33 @@ const Router = () => {
   if(!user) return <div>대기중</div>
 
   return (
-    <Suspense fallback={<>loading</>}>
-      <Routes>
-        <Route
-          path="/home"
-          element={<HomePage />}
-        />
-        <Route
-          path="/profile/:id"
-          element={<ProfilePage />}
-        />
-        <Route
-          path="/friend"
-          element={<FriendPage user={user} setUser={updateUser}/>}
-        />
-        <Route
-          path="/alarm"
-          element={<AlarmPage  user={user} setUser={updateUser}/>}
-        />
-        <Route
-          path="/my"
-          element={<MyPage />}
-        />
-        {/* <Route path="*" element={<PublicRoute component={} />} /> */}
-      </Routes>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<>loading</>}>
+        <Routes>
+          <Route
+            path="/home"
+            element={<HomePage />}
+          />
+          <Route
+            path="/profile/:id"
+            element={<ProfilePage />}
+          />
+          <Route
+            path="/friend"
+            element={<FriendPage user={user} setUser={updateUser}/>}
+          />
+          <Route
+            path="/alarm"
+            element={<AlarmPage  user={user} setUser={updateUser}/>}
+          />
+          <Route
+            path="/my"
+            element={<MyPage />}
+          />
+          {/* <Route path="*" element={<PublicRoute component={} />} /> */}
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
