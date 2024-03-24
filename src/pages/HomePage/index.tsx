@@ -70,23 +70,6 @@ const NoPageContainer = styled.div`
     align-items: center;
 `
 
-const SubText = styled.div`
-    font-size: 1rem;
-    margin-top: 15%;
-    margin-bottom: 5%;
-
-    font-weight: 400;
-    color: #ffffff;
-`
-
-const SubjectText = styled.div`
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ffffff;
-
-    margin-bottom: 10%;
-`
-
 const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
@@ -99,8 +82,6 @@ const MainContainer = styled.div`
 
 export {
     Logo,
-    SubText,
-    SubjectText,
     MainContainer,
     NoText,
     NoPageContainer
