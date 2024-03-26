@@ -36,7 +36,7 @@ const Router = () => {
           />
           <Route
             path="/alarm"
-            element={<AlarmPage  user={user} setUser={updateUser}/>}
+            element={<AlarmPage user={user} setUser={updateUser}/>}
           />
           <Route
             path="/my"
