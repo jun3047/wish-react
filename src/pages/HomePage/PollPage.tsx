@@ -5,17 +5,29 @@ import useUser from "../../hooks/useUser"
 import MainBtn from "../../components/MainBtn"
 import divideTwoLines from "../../utils/divideTwoLines"
 import { SimpleUserType, UserType } from "../../types/user"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ReactComponent as RefreshIcon } from '../../images/assets/refresh.svg';
+import { pushApi } from "../../apis"
+import makeUserSimple from "../../utils/MakeUserSimple"
 
 export default function PollPage () {
 
+    const [friendName, setSelcetedName] = useState<string>("");
     const [user, setUser] = useUser()
     const [poll, setPoll, scheduleNextPoll] = usePoll()
 
     if(!user) return <Logo>대기중</Logo>
     if(!poll) return <Logo>대기중</Logo>
-    
+
+    const pollFriend = (friendName: string) => {
+
+        const targetFriend = user.friends.find(friend => friend.name === friendName)
+        if (!targetFriend) return
+
+        pushApi.poll(makeUserSimple(user), targetFriend.token, poll.question)
+        scheduleNextPoll()
+    }
+
     return (
         <MainContainer>
             <PollPageContainer>
@@ -26,25 +38,33 @@ export default function PollPage () {
                         <SubjectText key={index}>{line}</SubjectText>
                     ))
                 }
-                <PollButtonGrid user={user}/>
-                <MainBtn onClick={scheduleNextPoll}>투표하기</MainBtn>
+                <PollButtonGrid
+                    friendName={friendName}
+                    setSelcetedName={setSelcetedName}
+                    user={user}
+                />
+                <MainBtn onClick={() => pollFriend(friendName)}>투표하기</MainBtn>
             </PollPageContainer>
         </MainContainer>
     )
 }
 
 
-const PollButtonGrid = ({user}:{
-    user: UserType
+const PollButtonGrid = ({
+    user,
+    friendName,
+    setSelcetedName
+}:{
+    user: UserType,
+    friendName: string,
+    setSelcetedName: React.Dispatch<React.SetStateAction<string>>
 }) => {
 
     const MaxRefresh = 3
 
     const [refreshNum, setRefreshNum] = useState<number>(MaxRefresh - 1);
-    const [friendName, setSelcetedName] = useState<string>("");
 
     // user.friends 대신 테스트로 쓸 것
-
     const testFriend: Omit<SimpleUserType, 'id' | 'name'> = {
         token: "토큰",
         age: 18,

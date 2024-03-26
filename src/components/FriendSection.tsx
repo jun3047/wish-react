@@ -6,7 +6,7 @@ import useUser from '../hooks/useUser';
 import { SimpleUserType, UserType } from '../types/user';
 import makeUserSimple from '../utils/MakeUserSimple';
 import { Logo } from '../pages/HomePage';
-import { friendApi } from '../apis';
+import { friendApi, pushApi } from '../apis';
 
 
 interface FriendSectionProps {
@@ -27,6 +27,7 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
 
   const beFriend = async (targetUser: SimpleUserType) => {
     friendApi.beFriend(makeUserSimple(user), targetUser)
+    pushApi.reciveFriend(user, targetUser.token)
     setUser({
         ...user,
         friends: user.friends ?
@@ -36,7 +37,7 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
   }
 
   const addFriend = async (targetUser: SimpleUserType) => {
-    // push보내고
+    pushApi.reqFriend(user, targetUser.token)
     setUser({
         ...user,
         requestFriends: user.requestFriends ?

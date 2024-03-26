@@ -59,6 +59,28 @@ const usePoll = () => {
         handleNative(APP_SYNC_ACTION, pollDataString);
     };
 
+    const initPoll = () => {
+        const newQuestion = randomQuestion("")
+        const newPoll = {
+            question: newQuestion,
+            nextTime: 0,
+        }
+        
+        const content = JSON.stringify({
+            title: '새로운 질문이 도착했어요',
+            body: '친구들 중 한명에게 투표해봐요',
+            data: {
+                pollInfo: newPoll
+            }
+        })
+
+        handleNative('로컬푸시', content)
+
+        updateData({
+            question: '',
+            nextTime: ''
+        }, false)
+    }
 
     const scheduleNextPoll = () => {
 
@@ -86,7 +108,7 @@ const usePoll = () => {
         }, false)
     }
 
-    return [poll, updateData, scheduleNextPoll] as const;
+    return [poll, updateData, scheduleNextPoll, initPoll] as const;
 };
 
 export default usePoll
