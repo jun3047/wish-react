@@ -1,27 +1,41 @@
 import styled from "@emotion/styled"
 import { Logo, MainContainer, NoPageContainer, NoText } from "."
 import useRecommendFeeds from "../../apis/queries/useRecommendFeeds"
-import useUser from "../../hooks/useUser"
 import handleNative from "../../native"
 import { UserType } from "../../types/user"
 import MainBtn from "../../components/MainBtn"
+import { FeedType } from "../../types/feed"
+import makeUserSimple from "../../utils/MakeUserSimple"
+import FeedCard from "../../components/FeedCard"
+import { css } from '@emotion/react';
 
 export default function FeedPage ({user}: {user: UserType}) {
 
     const {data} = useRecommendFeeds(user)
 
+    // orign
+    // if(!data.length) return <NoFeedPage />
 
-    if(!data.length) return <NoFeedPage />
+    const fakeFeed: FeedType = {
+        id: 1,
+        question: '질문이 들어갈 곳',
+        writer: makeUserSimple(user),
+        imgUrl: 'https://i.pinimg.com/736x/75/99/23/75992317aaeac57424fb1230bf3c5588.jpg',
+        warnUserIds: [],
+        asker: makeUserSimple(user),
+        time: ""
+    }
+
+    const fakeFeeds = Array.from({length: 10}, (_, i) => fakeFeed)
 
     return (
         <MainContainer>
-            <Logo>피드 페이지</Logo>
-            <Logo>{data.length}</Logo>
-            <Logo onClick={()=>{
-                handleNative('프로필이동', '0')
-            }}>프로필</Logo>
-            <Logo>{user.age}</Logo>
-            <Logo>{user.age}</Logo>
+            <Logo style={{position: 'relative', marginBottom: '20px'}}>WISH</Logo>
+            {
+                fakeFeeds.map(feed => (
+                    <FeedCard key={feed.id} feed={feed} />
+                ))
+            }
         </MainContainer>
     )
 }

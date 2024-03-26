@@ -1,11 +1,11 @@
-import { UserType } from "./user";
+import { SimpleUserType } from "./user";
 
 export interface FeedType {
     id: number;
     question: string;
     imgUrl: string;
     warnUserIds: number[] | [];
-    writer: UserType;
-    asker: UserType;
+    writer: SimpleUserType;
+    asker: SimpleUserType;
     time: string;
 }
