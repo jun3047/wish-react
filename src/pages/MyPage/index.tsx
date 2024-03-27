@@ -4,6 +4,10 @@ import { Logo, MainContainer, NoPageContainer, NoText } from '../HomePage';
 import FeedCard from '../../components/FeedCard';
 import useFeeds from '../../apis/queries/useFeeds';
 import MainBtn from '../../components/MainBtn';
+import { ReactComponent as OptionIcon } from '../../images/assets/option.svg';
+import { Dropdown, MenuProps } from 'antd';
+import usePoll from '../../hooks/usePoll';
+import handleNative from '../../native';
 
 export default function MyPage () {
 
@@ -13,6 +17,7 @@ export default function MyPage () {
 
     return (
         <MyPageContainer>
+            <MyMenu />
             <UserProfile />
             <BigText>{user.name}</BigText>
             <SubBoldGray>@{user.school}</SubBoldGray>
@@ -37,7 +42,7 @@ export default function MyPage () {
 }
 
 const MyPageContainer = styled(MainContainer)`
-    padding: 40px 0;
+    padding-bottom: 40px;
 `
 
 const UserFeeds = ({feedIds} : {
@@ -56,6 +61,51 @@ const UserFeeds = ({feedIds} : {
         </FeedCardContainer>
     )
 }
+
+
+const MyMenu = () => {
+  
+    const [user, setUser] = useUser()
+    const [poll, setPoll] = usePoll()
+  
+    if(!user) return null
+  
+    const items: MenuProps['items'] = [
+      {key: '1', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+  
+      }}>문의하기</a> )},
+      {key: '2', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+
+        if(!window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')) return
+
+        setUser(null)
+        setPoll(null)
+        window.localStorage.removeItem('userInfo')
+        window.localStorage.removeItem('pollInfo')
+        handleNative('앱동기화', JSON.stringify({userInfo: null, pollInfo: null}))
+
+        handleNative('초기화면')
+
+      }}>탈퇴하기</a> )}
+    ]
+
+      return (
+        <UserHeader>
+          <Dropdown menu={{items}} placement="bottomLeft">
+              <OptionIcon onClick={(e) => e.stopPropagation()}/>
+          </Dropdown>
+        </UserHeader>
+      )
+  }
+
+const UserHeader = styled.header`
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+`
 
 const FeedCardContainer = styled.div`
     display: flex;
@@ -95,6 +145,7 @@ const UserProfile = styled.div`
     width: 24%;
     aspect-ratio: 1;
     border-radius: 50%;
+
     margin-bottom: 1rem;
 `
 

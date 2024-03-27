@@ -50,7 +50,7 @@ const useUser = () => {
         };
     }, []);
 
-    const updateData = (userData: UserType, fromApp: boolean = false ) => {
+    const updateData = (userData: UserType | null, fromApp: boolean = false ) => {
         const userDataString = JSON.stringify({ userInfo: userData });
         window.localStorage.setItem(USER_INFO_KEY, JSON.stringify(userData));
         setUser(userData);

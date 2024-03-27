@@ -49,7 +49,7 @@ const usePoll = () => {
         };
     }, []);
 
-    const updateData = (pollData: PollType, fromApp: boolean = false ) => {
+    const updateData = (pollData: PollType | null, fromApp: boolean = false ) => {
         const pollDataString = JSON.stringify({ pollInfo: pollData });
         window.localStorage.setItem(POLL_INFO_KEY, JSON.stringify(pollData));
         setPoll(pollData);
