@@ -73,7 +73,7 @@ const MyMenu = () => {
     const items: MenuProps['items'] = [
       {key: '1', label: ( <a onClick={(e) => {
         e.stopPropagation()
-  
+
       }}>문의하기</a> )},
       {key: '2', label: ( <a onClick={(e) => {
         e.stopPropagation()
@@ -84,10 +84,7 @@ const MyMenu = () => {
         setPoll(null)
         window.localStorage.removeItem('userInfo')
         window.localStorage.removeItem('pollInfo')
-        handleNative('앱동기화', JSON.stringify({userInfo: null, pollInfo: null}))
-
-        handleNative('초기화면')
-
+        handleNative('초기화')
       }}>탈퇴하기</a> )}
     ]
 
