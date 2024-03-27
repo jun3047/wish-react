@@ -3,6 +3,9 @@ import { FeedType } from "../types/feed";
 import handleNative from "../native";
 import { ReactComponent as OptionIcon } from '../images/assets/option.svg';
 import { Dropdown, Menu, MenuProps } from "antd";
+import { feedApi, friendApi, pushApi } from "../apis";
+import useUser from "../hooks/useUser";
+import getRelationById from "../utils/getRelationById";
 
 const FeedCard = ({ feed }: { feed: FeedType }) => {
 
@@ -24,18 +27,76 @@ const FeedCard = ({ feed }: { feed: FeedType }) => {
             <WriterName>{feed.writer.name}</WriterName>
             <WriterDetails>{feed.writer.school}</WriterDetails>
           </WriterInfo>
-          <FeedMenu />
+          <FeedMenu feed={feed}/>
         </ProfileContainer>
       </CardContainer>
     );
   };
 
-const FeedMenu = () => {
-    const items: MenuProps['items'] = [
-        {key: '1', label: ( <a onClick={(e) => e.stopPropagation()}>신고하기</a> )},
-        {key: '2', label: ( <a onClick={(e) => e.stopPropagation()}>신고하기</a> )},
-        {key: '3', label: ( <a onClick={(e) => e.stopPropagation()}>신고하기</a> )}
-    ]
+const FeedMenu = ({feed}: {
+  feed: FeedType
+}) => {
+
+  const [user, setUser] = useUser()
+
+  if(!user) return null
+
+  const relation = getRelationById(user, feed.writer)
+
+  const items: MenuProps['items'] = [
+    {key: '1', label: ( <a onClick={(e) => {
+      e.stopPropagation()
+      if(!confirm('정말 신고하시겠습니까?')) return
+      
+      feedApi.warnFeed(user.id, feed.id)
+      .then(() => alert('신고가 완료되었습니다.'))
+      .catch(() => alert('이미 신고한 게시물입니다.'))
+
+    }}>신고하기</a> )},
+    {key: '2', label: ( <a onClick={(e) => {
+      e.stopPropagation()
+
+      if(relation === 'me')
+      return handleNative('탭이동', 'my')
+      
+      handleNative('프로필이동', feed.writer.id.toString())
+    }}>프로필 이동</a> )}
+  ]
+
+  const lastItem = (
+      text:string,
+      onClick: () => void
+    ) => {
+        return {
+          key: '3',
+          label: (<a onClick={(e) => {
+          e.stopPropagation()
+          onClick()
+        }}>{text}</a>)}
+    }
+
+  switch(relation) {
+    case 'recive':
+      items.push(lastItem('친구 수락하기', () => {
+        if(!confirm(`${feed.writer.name}님의 친구 요청을 수락하겠습니까?`)) return
+        friendApi.beFriend(user, feed.writer)
+        setUser({...user, friends: [...user.friends, feed.writer]})
+      }))
+      break
+    case 'none':
+      items.push(lastItem('친구 요청하기', () => {
+        if(!confirm(`${feed.writer.name}님께 친구 요청을 하겠습니까?`)) return
+        pushApi.reqFriend(user, feed.writer.token)
+        setUser({...user, requestFriends: [...user.requestFriends, feed.writer]})
+      }))
+      break
+    case 'request':
+      break
+    case 'friend':
+      break
+    case 'me':
+      break  
+  }
 
     return (
         <Dropdown menu={{items}} placement="bottomLeft">
