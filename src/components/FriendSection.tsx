@@ -4,7 +4,7 @@ import { useState } from 'react';
 import handleNative from '../native';
 import useUser from '../hooks/useUser';
 import { SimpleUserType, UserType } from '../types/user';
-import makeUserSimple from '../utils/MakeUserSimple';
+import makeUserSimple from '../utils/makeUserSimple';
 import { Logo } from '../pages/HomePage';
 import { friendApi, pushApi } from '../apis';
 

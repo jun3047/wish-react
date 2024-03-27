@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import handleNative from "../native"
 import { AlarmType } from "../types/alarm"
 import { ReactComponent as CameraIcon } from "../images/assets/camera.svg"
-import makeUserSimple from "../utils/MakeUserSimple"
+import makeUserSimple from "../utils/makeUserSimple"
 import { UserType } from "../types/user"
 
 const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {

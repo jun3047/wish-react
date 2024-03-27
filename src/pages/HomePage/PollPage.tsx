@@ -8,7 +8,7 @@ import { SimpleUserType, UserType } from "../../types/user"
 import { useEffect, useState } from "react"
 import { ReactComponent as RefreshIcon } from '../../images/assets/refresh.svg';
 import { pushApi } from "../../apis"
-import makeUserSimple from "../../utils/MakeUserSimple"
+import makeUserSimple from "../../utils/makeUserSimple"
 
 export default function PollPage () {
 

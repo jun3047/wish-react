@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import useRecommendFriends from '../../apis/queries/useRecommendFriends';
 import { SimpleUserType, UserType } from '../../types/user';
 import { friendApi } from '../../apis';
-import makeUserSimple from '../../utils/MakeUserSimple';
+import makeUserSimple from '../../utils/makeUserSimple';
 import FriendSection from '../../components/FriendSection';
 import { Logo, NoPageContainer, NoText } from '../HomePage';
 

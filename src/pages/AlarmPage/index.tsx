@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
 import { UserType } from '../../types/user';
-import makeUserSimple from '../../utils/MakeUserSimple';
+import makeUserSimple from '../../utils/makeUserSimple';
 import { MainContainer, NoPageContainer, NoText } from '../HomePage';
 import AlarmBox from '../../components/AlarmBox';
 import { AlarmType } from '../../types/alarm';

@@ -8,7 +8,7 @@ import useProfile from '../../apis/queries/useProfile';
 import { Logo, MainContainer, NoPageContainer, NoText } from '../HomePage';
 import FeedCard from '../../components/FeedCard';
 import { FeedType } from '../../types/feed';
-import makeUserSimple from '../../utils/MakeUserSimple';
+import makeUserSimple from '../../utils/makeUserSimple';
 import { UserType } from '../../types/user';
 import useFeeds from '../../apis/queries/useFeeds';
 import MainBtn from '../../components/MainBtn';
