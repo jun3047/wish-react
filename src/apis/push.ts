@@ -26,34 +26,34 @@ const pushApi: PushApiType = {
             asker: user
         }
 
-        handleNative('푸시', JSON.stringify({
+        handleNative('푸시', JSON.stringify({pushs: [{
             token: targetToken,
             data: {
                 title: '누구가가 당신을 투표했어요',
                 body: '어떤 질문일까요?',
                 data: {alarm}
             }
-        }))
+        }]}))
     },
     reqFriend: (user, targetToken) => {
-        handleNative('푸시', JSON.stringify({
+        handleNative('푸시', JSON.stringify({pushs: [{
             token: targetToken,
             data: {
                 title: '친구 요청이 왔어요',
                 body: '어떤 친구일까요?',
                 data: {req: user}
             }
-        }))
+        }]}))
     },
     reciveFriend: (user, targetToken) => {
-        handleNative('푸시', JSON.stringify({
+        handleNative('푸시', JSON.stringify({pushs: [{
             token: targetToken,
             data: {
                 title: '새로운 친구 생겼어요',
                 body: '지금 친구의 글을 확인해봐요',
                 data: {beFriend: user}
             }
-        }))
+        }]}))
     },
 
 }
