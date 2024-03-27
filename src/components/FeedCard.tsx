@@ -46,7 +46,7 @@ const FeedMenu = ({feed}: {
   const items: MenuProps['items'] = [
     {key: '1', label: ( <a onClick={(e) => {
       e.stopPropagation()
-      if(!confirm('정말 신고하시겠습니까?')) return
+      if(!window.confirm('정말 신고하시겠습니까?')) return
       
       feedApi.warnFeed(user.id, feed.id)
       .then(() => alert('신고가 완료되었습니다.'))
@@ -78,14 +78,14 @@ const FeedMenu = ({feed}: {
   switch(relation) {
     case 'recive':
       items.push(lastItem('친구 수락하기', () => {
-        if(!confirm(`${feed.writer.name}님의 친구 요청을 수락하겠습니까?`)) return
+        if(!window.confirm(`${feed.writer.name}님의 친구 요청을 수락하겠습니까?`)) return
         friendApi.beFriend(user, feed.writer)
         setUser({...user, friends: [...user.friends, feed.writer]})
       }))
       break
     case 'none':
       items.push(lastItem('친구 요청하기', () => {
-        if(!confirm(`${feed.writer.name}님께 친구 요청을 하겠습니까?`)) return
+        if(!window.confirm(`${feed.writer.name}님께 친구 요청을 하겠습니까?`)) return
         pushApi.reqFriend(user, feed.writer.token)
         setUser({...user, requestFriends: [...user.requestFriends, feed.writer]})
       }))
