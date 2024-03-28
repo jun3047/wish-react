@@ -28,11 +28,13 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
   const beFriend = async (targetUser: SimpleUserType) => {
     friendApi.beFriend(makeUserSimple(user), targetUser)
     pushApi.reciveFriend(user, targetUser.token)
+
     setUser({
         ...user,
         friends: user.friends ?
         [...user.friends, targetUser]:
-        [targetUser]
+        [targetUser],
+        requestFriends: user.requestFriends.filter(friend => friend.id !== targetUser.id)
     })
   }
 
