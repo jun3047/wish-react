@@ -55,7 +55,7 @@ const FirstPollPage = ({initPoll}: {initPoll: () => void}) => {
             <NoPageContainer>
                 <Logo>WISH</Logo>
                 <NoText>이제 투표를 할 수 있어요</NoText>
-                <NoText>아래 버튼을 눌러 첫 투표를 시작해봐요</NoText>
+                <NoText>첫 투표를 시작해봐요</NoText>
                 <MainBtn onClick={initPoll}>투표 주제 받기</MainBtn>
             </NoPageContainer>  
         </MainContainer>

@@ -74,7 +74,7 @@ const usePoll = () => {
             }
         })
 
-        handleNative('로컬푸시', content)
+        handleNative('첫투표로컬푸시', content)
 
         updateData({
             question: '',
