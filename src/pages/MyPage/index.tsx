@@ -75,6 +75,15 @@ const MyMenu = () => {
         e.stopPropagation()
 
       }}>문의하기</a> )},
+      {key: '3', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+        setUser({
+            ...user,
+            friends: [],
+            requestFriends: [],
+            receivedFriends: []
+        })
+      }}>친구 관련 사항 삭제하기</a> )},
       {key: '2', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
