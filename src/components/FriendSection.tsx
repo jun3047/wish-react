@@ -39,7 +39,7 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
   }
 
   const addFriend = async (targetUser: SimpleUserType) => {
-    pushApi.reqFriend(user, targetUser.token)
+    pushApi.reqFriend(makeUserSimple(user), targetUser.token)
     setUser({
         ...user,
         requestFriends: !user?.requestFriends?.length ?
