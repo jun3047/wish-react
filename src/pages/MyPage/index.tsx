@@ -79,6 +79,12 @@ const MyMenu = () => {
         e.stopPropagation()
         alert('user.alarms' + JSON.stringify(user.alarms))
       }}>user.alarms 확인</a> )},
+      {key: '5', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+        alert('user.receivedFriends' + JSON.stringify(user.receivedFriends))
+        alert('user.friends' + JSON.stringify(user.friends))
+        alert('user.requestFriends' + JSON.stringify(user.requestFriends))
+      }}>user의 friend관련  확인</a> )},
       {key: '3', label: ( <a onClick={(e) => {
         e.stopPropagation()
         setUser({
