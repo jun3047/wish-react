@@ -14,13 +14,12 @@ export default function HomePage () {
     const [user, setUser] = useUser()
 
     if(!user) return <Logo>대기중</Logo>
-    if(!poll) return <Logo>대기중</Logo>
 
     if(!user.friends || user.friends.length < MIN_FRIENDS) {
         return <NoFirendPage />
     }
 
-    if(poll.question === null) {
+    if(poll === null) {
         return <FirstPollPage initPoll={initPoll}/>
     }
 
