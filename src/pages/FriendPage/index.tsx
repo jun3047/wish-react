@@ -28,7 +28,7 @@ export default function FriendPage ({
     }
     const FilterData = data.filter(isNotShowFriend)
 
-    const isRecommendFriend = FilterData.length > 0
+    const isRecommendFriend = FilterData.length + user.receivedFriends.length > 0
 
     return (
         <MainContainer>
