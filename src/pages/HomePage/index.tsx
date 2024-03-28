@@ -10,16 +10,21 @@ const MIN_FRIENDS = 4
 
 export default function HomePage () {
 
-    const [poll, setPoll, scheduleNextPoll] = usePoll()
+    const [poll, setPoll, scheduleNextPoll, initPoll] = usePoll()
     const [user, setUser] = useUser()
 
     if(!user) return <Logo>대기중</Logo>
+    if(!poll) return <Logo>대기중</Logo>
 
     if(!user.friends || user.friends.length < MIN_FRIENDS) {
         return <NoFirendPage />
     }
 
-    if(!poll?.question) {
+    if(poll.question === null) {
+        return <FirstPollPage initPoll={initPoll}/>
+    }
+
+    if(poll.question === "") {
         return <FeedPage user={user}/>
     }
 
@@ -39,6 +44,20 @@ const NoFirendPage = () => {
                 <NoText>시작을 위해서</NoText>
                 <NoText>4명 이상의 친구가 필요해요</NoText>
                 <MainBtn onClick={goToFriendPage}>추천 친구 보기</MainBtn>
+            </NoPageContainer>  
+        </MainContainer>
+    )
+}
+
+const FirstPollPage = ({initPoll}: {initPoll: () => void}) => {
+
+    return (
+        <MainContainer>
+            <NoPageContainer>
+                <Logo>WISH</Logo>
+                <NoText>이제 투표를 할 수 있어요</NoText>
+                <NoText>아래 버튼을 눌러 첫 투표를 시작해봐요</NoText>
+                <MainBtn onClick={initPoll}>투표 주제 받기</MainBtn>
             </NoPageContainer>  
         </MainContainer>
     )
