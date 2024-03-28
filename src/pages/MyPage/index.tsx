@@ -8,6 +8,7 @@ import { ReactComponent as OptionIcon } from '../../images/assets/option.svg';
 import { Dropdown, MenuProps } from 'antd';
 import usePoll from '../../hooks/usePoll';
 import handleNative from '../../native';
+import makeUserSimple from '../../utils/makeUserSimple';
 
 export default function MyPage () {
 
@@ -75,6 +76,18 @@ const MyMenu = () => {
         e.stopPropagation()
 
       }}>문의하기</a> )},
+      {key: '6', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+
+        setUser({
+            ...user,
+            friends: [
+                ...Array.from({length: 12}, (_, index) => makeUserSimple(user),)
+            ],
+        })
+
+        alert('user.friends' + JSON.stringify(user.friends))
+      }}>user.friends에 12명 추가</a> )},
       {key: '4', label: ( <a onClick={(e) => {
         e.stopPropagation()
         alert('user.alarms' + JSON.stringify(user.alarms))
