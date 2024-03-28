@@ -31,9 +31,9 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
 
     setUser({
         ...user,
-        friends: user.friends ?
-        [...user.friends, targetUser]:
-        [targetUser],
+        friends: !user?.friends?.length ?
+        [targetUser]:
+        [...user.friends, targetUser],
         requestFriends: user.requestFriends.filter(friend => friend.id !== targetUser.id)
     })
   }
@@ -42,9 +42,9 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
     pushApi.reqFriend(user, targetUser.token)
     setUser({
         ...user,
-        requestFriends: user.requestFriends ?
-        [...user.requestFriends, targetUser]:
-        [targetUser]
+        requestFriends: !user?.requestFriends?.length ?
+        [targetUser]:
+        [...user.requestFriends, targetUser]
     })
   }
 
