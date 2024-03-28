@@ -21,8 +21,9 @@ export default function FriendPage ({
     const isNotShowFriend = (friend: SimpleUserType) => {
         const alreadyFriends = user.friends.find(userFriend => userFriend.id === friend.id)
         const alreadyRequestFriends = user.requestFriends.find(userFriend => userFriend.id === friend.id)
+        const alreadyReceivedFriends = user.receivedFriends.find(userFriend => userFriend.id === friend.id)
 
-        return !alreadyFriends && !alreadyRequestFriends
+        return !alreadyFriends && !alreadyRequestFriends && !alreadyReceivedFriends
     }
     const FilterData = data.filter(isNotShowFriend)
 
@@ -31,7 +32,7 @@ export default function FriendPage ({
     return (
         <MainContainer>
             <FriendSection
-                title={'신규요청'}
+                title={'신규 요청'}
                 data={user.receivedFriends}
             />
             <FriendSection
