@@ -56,7 +56,7 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
           <ProfileIcon />
           <FriendInfo>
             <FriendName>{item.name}</FriendName>
-            <MutualFriends>함께 아는 친구 2명</MutualFriends>
+            <MutualFriends>{item.age}살 {item.school}</MutualFriends>
           </FriendInfo>
           <div style={{ flex: 1 }} />
           {title === '신규 요청' ? (
