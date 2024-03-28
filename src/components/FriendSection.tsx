@@ -34,7 +34,7 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
         friends: !user?.friends?.length ?
         [targetUser]:
         [...user.friends, targetUser],
-        requestFriends: user.requestFriends.filter(friend => friend.id !== targetUser.id)
+        receivedFriends: user.receivedFriends.filter(friend => friend.id !== targetUser.id)
     })
   }
 
