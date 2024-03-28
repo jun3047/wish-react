@@ -6,6 +6,7 @@ import { MainContainer, NoPageContainer, NoText } from '../HomePage';
 import AlarmBox from '../../components/AlarmBox';
 import { AlarmType } from '../../types/alarm';
 import MainBtn from '../../components/MainBtn';
+import { useEffect } from 'react';
 
 export default function AlarmPage ({
     user,
@@ -14,6 +15,14 @@ export default function AlarmPage ({
     user: UserType,
     setUser: (user: UserType) => void
 }) {
+
+    useEffect(() => {
+        alert('user.alarms' + user.alarms)
+    }, [user.alarms])
+
+    useEffect(() => {
+        alert('user 변화' + user)
+    }, [user])
 
     if(user.alarms.length === 0) return <NoAlarmPage />
 

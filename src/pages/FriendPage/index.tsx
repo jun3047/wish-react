@@ -5,6 +5,7 @@ import { friendApi } from '../../apis';
 import makeUserSimple from '../../utils/makeUserSimple';
 import FriendSection from '../../components/FriendSection';
 import { Logo, NoPageContainer, NoText } from '../HomePage';
+import { useEffect } from 'react';
 
 export default function FriendPage ({
     user,
@@ -17,7 +18,7 @@ export default function FriendPage ({
     const {data} = useRecommendFriends(user)
 
     if(!data) return <div>로딩중</div>
-
+    
     const isNotShowFriend = (friend: SimpleUserType) => {
         const alreadyFriends = user.friends.find(userFriend => userFriend.id === friend.id)
         const alreadyRequestFriends = user.requestFriends.find(userFriend => userFriend.id === friend.id)
