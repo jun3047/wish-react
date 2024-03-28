@@ -22,6 +22,8 @@ export default function PollPage () {
     const pollFriend = (friendName: string) => {
 
         const targetFriend = user.friends.find(friend => friend.name === friendName)
+
+        alert("투표가 완료되었습니다" + friendName + + JSON.stringify(targetFriend))
         if (!targetFriend) return
 
         pushApi.poll(makeUserSimple(user), targetFriend.token, poll.question)
@@ -60,26 +62,10 @@ const PollButtonGrid = ({
     setSelcetedName: React.Dispatch<React.SetStateAction<string>>
 }) => {
 
-    const MaxRefresh = 3
+    const MaxRefresh = user.friends.length > 12 ? 3 : 
+                       user.friends.length > 8 ? 2 : 1
 
     const [refreshNum, setRefreshNum] = useState<number>(MaxRefresh - 1);
-
-    // user.friends 대신 테스트로 쓸 것
-    const testFriend: Omit<SimpleUserType, 'id' | 'name'> = {
-        token: "토큰",
-        age: 18,
-        phone: "폰번호",
-        gender: "남자",
-        feedIds: [],
-        school: '학교',
-        schoolLocation: '학교위치',
-    }
-
-    const testFriends = Array.from({length: 12}, (_, i) => ({
-        id: i,
-        name: `친구${i}`,
-        ...testFriend
-    }))
 
     const nowRefreshIndex = MaxRefresh - (refreshNum + 1)
 
@@ -87,11 +73,10 @@ const PollButtonGrid = ({
         <>
         <GridContainer>
             {
-                // user.friends
-                testFriends.slice(nowRefreshIndex*4, (nowRefreshIndex+1)*4).map((friend, i)=>(
+                
+                user.friends.slice(nowRefreshIndex*4, (nowRefreshIndex+1)*4).map((friend, i)=>(
                     <PollButton
-                        // key={friend.id}
-                        key={i}
+                        key={friend.id}
                         setSelcetedName={setSelcetedName}
                         name={friend.name}
                         friendName={friendName}
