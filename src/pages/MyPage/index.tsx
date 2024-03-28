@@ -75,6 +75,10 @@ const MyMenu = () => {
         e.stopPropagation()
 
       }}>문의하기</a> )},
+      {key: '4', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+        alert('user.alarms' + JSON.stringify(user.alarms))
+      }}>user.alarms 확인</a> )},
       {key: '3', label: ( <a onClick={(e) => {
         e.stopPropagation()
         setUser({
