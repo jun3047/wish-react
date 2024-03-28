@@ -12,21 +12,17 @@ import makeUserSimple from "../../utils/makeUserSimple"
 
 export default function PollPage () {
 
-    const [friendName, setSelcetedName] = useState<string>("");
+    const [friend, setSelcetedFriend] = useState<SimpleUserType | null>(null);
     const [user, setUser] = useUser()
     const [poll, setPoll, scheduleNextPoll] = usePoll()
 
     if(!user) return <Logo>대기중</Logo>
     if(!poll) return <Logo>대기중</Logo>
 
-    const pollFriend = (friendName: string) => {
+    const pollFriend = (friend: SimpleUserType | null) => {
 
-        const targetFriend = user.friends.find(friend => friend.name === friendName)
-
-        alert("투표가 완료되었습니다" + friendName + + JSON.stringify(targetFriend))
-        if (!targetFriend) return
-
-        pushApi.poll(makeUserSimple(user), targetFriend.token, poll.question)
+        if(!friend) return;
+        pushApi.poll(makeUserSimple(user), friend.token, poll.question)
         scheduleNextPoll()
     }
 
@@ -41,11 +37,11 @@ export default function PollPage () {
                     ))
                 }
                 <PollButtonGrid
-                    friendName={friendName}
-                    setSelcetedName={setSelcetedName}
+                    friend={friend}
+                    setSelcetedFriend={setSelcetedFriend}
                     user={user}
                 />
-                <MainBtn onClick={() => pollFriend(friendName)}>투표하기</MainBtn>
+                <MainBtn onClick={() => pollFriend(friend)}>투표하기</MainBtn>
             </PollPageContainer>
         </MainContainer>
     )
@@ -54,12 +50,12 @@ export default function PollPage () {
 
 const PollButtonGrid = ({
     user,
-    friendName,
-    setSelcetedName
+    friend,
+    setSelcetedFriend
 }:{
     user: UserType,
-    friendName: string,
-    setSelcetedName: React.Dispatch<React.SetStateAction<string>>
+    friend: SimpleUserType | null,
+    setSelcetedFriend: React.Dispatch<React.SetStateAction<SimpleUserType | null>>
 }) => {
 
     const MaxRefresh = user.friends.length > 12 ? 3 : 
@@ -73,13 +69,12 @@ const PollButtonGrid = ({
         <>
         <GridContainer>
             {
-                
-                user.friends.slice(nowRefreshIndex*4, (nowRefreshIndex+1)*4).map((friend, i)=>(
+                user.friends.slice(nowRefreshIndex*4, (nowRefreshIndex+1)*4).map((_friend, i)=>(
                     <PollButton
-                        key={friend.id}
-                        setSelcetedName={setSelcetedName}
-                        name={friend.name}
-                        friendName={friendName}
+                        key={_friend.id}
+                        setSelcetedFriend={setSelcetedFriend}
+                        friend={_friend}
+                        selectedFriend={friend}
                     />
                 ))
             }
@@ -92,21 +87,21 @@ const PollButtonGrid = ({
     )
 }
 
-const PollButton = ({ name, setSelcetedName, friendName }: { 
-    name: string, 
-    setSelcetedName: (friendName: string) => void,
-    friendName: string
+const PollButton = ({ friend, setSelcetedFriend, selectedFriend }: { 
+    friend: SimpleUserType, 
+    setSelcetedFriend: (friend: SimpleUserType) => void,
+    selectedFriend: SimpleUserType | null
 }) => {
 
-    return name === friendName ? (
+    return selectedFriend?.id === friend.id ? (
         <DisabledButton>
             <Circle />
-            {name}
+            {friend.name}
         </DisabledButton>
         ) : (
-        <ActiveButton onClick={() => setSelcetedName(name)}>
+        <ActiveButton onClick={() => setSelcetedFriend(friend)}>
             <Circle />
-            {name}
+            {friend.name}
         </ActiveButton>
     );
 };

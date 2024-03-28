@@ -82,7 +82,13 @@ const MyMenu = () => {
         setUser({
             ...user,
             friends: [
-                ...Array.from({length: 12}, (_, index) => makeUserSimple(user),)
+                ...Array.from({length: 12}, (_, index) => {
+                    
+                    return {
+                        ...makeUserSimple(user),
+                        id: index,
+                    }
+                },)
             ],
         })
 
