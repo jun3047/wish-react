@@ -22,7 +22,11 @@ const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {
           <CameraIcon
             onClick={(e) => {
               e.stopPropagation();
-              handleNative('카메라', JSON.stringify({ asker, question, writer}));
+              handleNative('카메라', JSON.stringify({
+                asker: asker,
+                question: question,
+                writer: writer
+              }));
             }}
           />
         </AlarmContainer>
