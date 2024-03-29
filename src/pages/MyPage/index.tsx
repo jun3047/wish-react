@@ -82,6 +82,7 @@ const MyMenu = () => {
         setUser({
             ...user,
             friends: [
+                ...user.friends,
                 ...Array.from({length: 12}, (_, index) => {
                     
                     return {
