@@ -19,7 +19,7 @@ export default function HomePage () {
         return <NoFirendPage />
     }
 
-    if(poll === null) {
+    if(poll === null || poll.question === null) {
         return <FirstPollPage initPoll={initPoll}/>
     }
 
