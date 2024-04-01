@@ -13,26 +13,13 @@ export default function FeedPage ({user}: {user: UserType}) {
 
     const {data} = useRecommendFeeds(user)
 
-    // orign
-    // if(!data.length) return <NoFeedPage />
-
-    const fakeFeed: FeedType = {
-        id: 1,
-        question: '질문이 들어갈 곳',
-        writer: makeUserSimple(user),
-        imgUrl: 'https://i.pinimg.com/736x/75/99/23/75992317aaeac57424fb1230bf3c5588.jpg',
-        warnUserIds: [],
-        asker: makeUserSimple(user),
-        time: ""
-    }
-
-    const fakeFeeds = Array.from({length: 10}, (_, i) => fakeFeed)
+    if(!data.length) return <NoFeedPage />
 
     return (
         <MainContainer>
             <Logo style={{position: 'relative', marginBottom: '20px'}}>WISH</Logo>
             {
-                fakeFeeds.map(feed => (
+                data.map(feed => (
                     <FeedCard key={feed.id} feed={feed} />
                 ))
             }

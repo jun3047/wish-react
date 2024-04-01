@@ -23,8 +23,9 @@ export default function FriendPage ({
         const alreadyFriends = user.friends.find(userFriend => userFriend.id === friend.id)
         const alreadyRequestFriends = user.requestFriends.find(userFriend => userFriend.id === friend.id)
         const alreadyReceivedFriends = user.receivedFriends.find(userFriend => userFriend.id === friend.id)
+        const isMe = user.id === friend.id
 
-        return !alreadyFriends && !alreadyRequestFriends && !alreadyReceivedFriends
+        return !alreadyFriends && !alreadyRequestFriends && !alreadyReceivedFriends && !isMe
     }
     const FilterData = data.filter(isNotShowFriend)
 

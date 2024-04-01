@@ -50,8 +50,6 @@ const UserFeeds = ({feedIds} : {
     feedIds: number[],
 }) => {
 
-    alert('feedIds' + JSON.stringify(feedIds))
-
     const {data} = useFeeds(feedIds)
 
     return (
@@ -101,6 +99,14 @@ const MyMenu = () => {
         e.stopPropagation()
         alert('user.alarms' + JSON.stringify(user.alarms))
       }}>user.alarms 확인</a> )},
+      {key: '7', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+        setUser({
+            ...user,
+            feedIds: [2,3]
+        })
+        alert('user.feedIds' + JSON.stringify(user.feedIds))
+      }}>user.feedIds 추가</a> )},
       {key: '5', label: ( <a onClick={(e) => {
         e.stopPropagation()
         alert('user.receivedFriends' + JSON.stringify(user.receivedFriends))
@@ -147,6 +153,7 @@ const UserHeader = styled.header`
 
 const FeedCardContainer = styled.div`
     display: flex;
+    flex-direction: column;
     padding-bottom: 2rem;
 `
 
