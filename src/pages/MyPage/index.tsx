@@ -50,7 +50,9 @@ const UserFeeds = ({feedIds} : {
     feedIds: number[],
 }) => {
 
-    const {data} = useFeeds([...feedIds])
+    alert('feedIds' + JSON.stringify(feedIds))
+
+    const {data} = useFeeds(feedIds)
 
     return (
         <FeedCardContainer>
