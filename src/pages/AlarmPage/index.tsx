@@ -16,14 +16,6 @@ export default function AlarmPage ({
     setUser: (user: UserType) => void
 }) {
 
-    useEffect(() => {
-        alert('user.alarms' + JSON.stringify(user.alarms))
-    }, [user.alarms])
-
-    useEffect(() => {
-        alert('user 변화' + JSON.stringify(user))
-    }, [user])
-
     if(user.alarms.length === 0) return <NoAlarmPage />
 
     return (
