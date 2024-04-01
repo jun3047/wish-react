@@ -9,12 +9,14 @@ interface Props {
 interface State {
   hasError: boolean;
   isOnline: boolean;
+  errorMessage: string;
 }
 
 class ErrorBoundary extends React.Component<Props, State> {
   state = {
     hasError: false,
-    isOnline: navigator.onLine
+    isOnline: navigator.onLine,
+    errorMessage: '',
   };
 
   componentDidMount() {
@@ -27,8 +29,12 @@ class ErrorBoundary extends React.Component<Props, State> {
     window.removeEventListener('offline', this.handleNetworkChange);
   }
 
-  static getDerivedStateFromError(): State {
-    return { hasError: true, isOnline: navigator.onLine };
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, isOnline: navigator.onLine, errorMessage: error.message };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    alert(`잡힌 에러: ${error.toString()}\n정보: ${errorInfo.componentStack}`);
   }
 
   handleNetworkChange = () => {
@@ -36,7 +42,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   retry = () => {
-    this.setState({ hasError: false });
+    this.setState({ hasError: false, errorMessage: '' });
     window.location.reload();
   }
 
