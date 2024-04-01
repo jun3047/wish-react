@@ -19,7 +19,7 @@ interface FeedApiType {
 const feedApi: FeedApiType = {
   postFeed: feedInfo => request.post('/feed', feedInfo),
   getRecommendFeeds: userInfo => request.post(`/feed/recommend`, userInfo),
-  getFeeds: feedIds => request.get(`/feed/${feedIds}`),
+  getFeeds: feedIds => request.post(`/feeds`, feedIds),
   warnFeed: (userId, feedId) => request.put(`/feed/warn`, {userId, feedId})
 };
 
