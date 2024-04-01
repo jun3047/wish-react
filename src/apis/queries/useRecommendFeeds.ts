@@ -15,7 +15,7 @@ const useRecommendFeeds = (user: UserType) => {
         friends: user.friends ?? [],
     }
 
-    alert(reqUserInfo)
+    alert(JSON.stringify(reqUserInfo))
 
     return useSuspenseQuery({
         queryKey: ['getRecommendFeeds'],
