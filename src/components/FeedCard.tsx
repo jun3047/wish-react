@@ -7,7 +7,7 @@ import { feedApi, friendApi, pushApi } from "../apis";
 import useUser from "../hooks/useUser";
 import getRelationById from "../utils/getRelationById";
 
-const FeedCard = ({ feed }: { feed: FeedType }) => {
+const FeedCard = ({ feed, warnFeed }: { feed: FeedType, warnFeed?: (feedId: number) => void }) => {
 
 
     const goToProfile = (id: number) => {
@@ -27,14 +27,15 @@ const FeedCard = ({ feed }: { feed: FeedType }) => {
             <WriterName>{feed.writer.name}</WriterName>
             <WriterDetails>{feed.writer.school}</WriterDetails>
           </WriterInfo>
-          <FeedMenu feed={feed}/>
+          <FeedMenu warnFeed={warnFeed} feed={feed}/>
         </ProfileContainer>
       </CardContainer>
     );
   };
 
-const FeedMenu = ({feed}: {
+const FeedMenu = ({feed, warnFeed}: {
   feed: FeedType
+  warnFeed?: (feedId: number) => void
 }) => {
 
   const [user, setUser] = useUser()
@@ -46,11 +47,18 @@ const FeedMenu = ({feed}: {
   const items: MenuProps['items'] = [
     {key: '1', label: ( <a onClick={(e) => {
       e.stopPropagation()
+
+      if(feed.writer.id === user.id) return alert('자신의 게시물은 신고할 수 없습니다.')
       if(!window.confirm('정말 신고하시겠습니까?')) return
       
       feedApi.warnFeed(user.id, feed.id)
       .then(() => alert('신고가 완료되었습니다.'))
       .catch(() => alert('이미 신고한 게시물입니다.'))
+      
+      const isMyFeed = warnFeed === undefined
+      if(isMyFeed) return 
+      
+      warnFeed(feed.id)
 
     }}>신고하기</a> )},
     {key: '2', label: ( <a onClick={(e) => {

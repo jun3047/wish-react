@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
 import { friendApi, userApi } from '../../apis';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from 'react-router-dom';
 import useProfile from '../../apis/queries/useProfile';
@@ -16,9 +16,14 @@ import MainBtn from '../../components/MainBtn';
 export default function ProfilePage () {
 
     const [user, setUser] = useUser()
+    const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
     const { id } = useParams() as {id: string}
     
     const {data} = useProfile(id)
+
+    const warnFeed = (feedId: number) => {
+        setWarnFeedIds([...warnFeedIds, feedId])
+    }
     
     if(!user) return <Logo>대기중</Logo>
 
@@ -42,7 +47,12 @@ export default function ProfilePage () {
             {
                 IsFriend ?
                 data.feedIds?.length ?
-                <UserFeeds feedIds={data.feedIds} />
+                <UserFeeds 
+                    user={user}
+                    warnFeedIds={warnFeedIds}
+                    warnFeed={warnFeed} 
+                    feedIds={data.feedIds}
+                />
                 :
                 <NoUserFeed />
                 :
@@ -52,17 +62,26 @@ export default function ProfilePage () {
     );
 }
 
-const UserFeeds = ({feedIds} : {
+const UserFeeds = ({feedIds, warnFeed, warnFeedIds, user} : {
     feedIds: number[],
+    warnFeed: (feedId: number) => void,
+    warnFeedIds: number[],
+    user: UserType
 }) => {
 
     const {data} = useFeeds(feedIds)
 
+    const filteredData = data.filter(feed => 
+        !warnFeedIds.includes(feed.id) &&
+        feed.writer.id !== user.id &&
+        (feed.warnUserIds.length === 0 || !(feed.warnUserIds as number[]).includes(user.id))
+    )
+
     return (
         <>
         {
-            data.map(feed => (
-                <FeedCard key={feed.id} feed={feed} />
+            filteredData.map(feed => (
+                <FeedCard warnFeed={warnFeed} key={feed.id} feed={feed} />
             ))
         }
         </>

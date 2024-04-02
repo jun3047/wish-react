@@ -8,19 +8,29 @@ import { FeedType } from "../../types/feed"
 import FeedCard from "../../components/FeedCard"
 import { css } from '@emotion/react';
 import makeUserSimple from "../../utils/makeUserSimple"
+import { useState } from "react"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
     const {data} = useRecommendFeeds(user)
+    const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
     if(!data.length) return <NoFeedPage />
+
+    const filteredData = data.filter(feed => 
+        !warnFeedIds.includes(feed.id) &&
+        feed.writer.id !== user.id &&
+        (feed.warnUserIds.length === 0 || !(feed.warnUserIds as number[]).includes(user.id))
+    )
+
+    const warnFeed = (feedId: number) => setWarnFeedIds([...warnFeedIds, feedId])
 
     return (
         <MainContainer>
             <Logo style={{position: 'relative', marginBottom: '20px'}}>WISH</Logo>
             {
-                data.map(feed => (
-                    <FeedCard key={feed.id} feed={feed} />
+                filteredData.map(feed => (
+                    <FeedCard key={feed.id} feed={feed} warnFeed={warnFeed}/>
                 ))
             }
         </MainContainer>
