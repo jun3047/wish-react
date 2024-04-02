@@ -19,7 +19,7 @@ const MainBtnContainer = styled.div`
     bottom: 3%;
 
     min-width: 80%;
-    height: 50px;
+    height: 60px;
 
     display: flex;
     justify-content: center;
