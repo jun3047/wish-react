@@ -22,6 +22,9 @@ export default function AlarmPage ({
     return (
         <AlarmContainer>
             <AlarmBigText>알람</AlarmBigText>
+            <MainBtn onClick={() => {
+                handleNative('인스타프로필', 'wishappteam')
+            }}>누군지 확인하기</MainBtn>
             {
                 user.alarms.map((alarm, index) => (
                     <AlarmBox
@@ -31,9 +34,6 @@ export default function AlarmPage ({
                     />
                 ))
             }
-            <MainBtn onClick={() => {
-                handleNative('인스타프로필', 'wishappteam')
-            }}>누군지 확인하기</MainBtn>
         </AlarmContainer>
     );
 }
@@ -47,7 +47,8 @@ const NoAlarmPage = () => {
 }
 
 const AlarmContainer = styled(MainContainer)`
-    padding: 20px;
+    padding: 20px 20px calc(3% + 90px) 20px;
+    overflow-y: scroll;
 `
 
 const AlarmBigText = styled.h2`
