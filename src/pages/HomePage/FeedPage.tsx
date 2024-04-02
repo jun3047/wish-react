@@ -15,7 +15,9 @@ export default function FeedPage ({user}: {user: UserType}) {
     const {data} = useRecommendFeeds(user)
     const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
-    if(!data.length) return <NoFeedPage />
+    alert('useRecommendFeeds(user)Data: ' + JSON.stringify(data))
+
+    if(data.length === 0) return <NoFeedPage />
 
     const filteredData = data.filter(feed => 
         !warnFeedIds.includes(feed.id) &&
@@ -23,7 +25,9 @@ export default function FeedPage ({user}: {user: UserType}) {
         (feed.warnUserIds.length === 0 || !(feed.warnUserIds as number[]).includes(user.id))
     )
 
-    if(!filteredData.length) return <NoFeedPage />
+    alert('filteredData: ' + JSON.stringify(data))
+
+    if(filteredData.length === 0) return <NoFeedPage />
 
     const warnFeed = (feedId: number) => setWarnFeedIds([...warnFeedIds, feedId])
 
