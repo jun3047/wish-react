@@ -23,6 +23,8 @@ export default function FeedPage ({user}: {user: UserType}) {
         (feed.warnUserIds.length === 0 || !(feed.warnUserIds as number[]).includes(user.id))
     )
 
+    if(!filteredData.length) return <NoFeedPage />
+
     const warnFeed = (feedId: number) => setWarnFeedIds([...warnFeedIds, feedId])
 
     return (
