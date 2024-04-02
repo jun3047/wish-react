@@ -16,10 +16,10 @@ const MainBtn = ({children, onClick}:{
 const MainBtnContainer = styled.div`
 
     position: fixed;
-    bottom: 5%;
+    bottom: 3%;
 
     min-width: 80%;
-    height: 70px;
+    height: 50px;
 
     display: flex;
     justify-content: center;
