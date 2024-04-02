@@ -25,7 +25,7 @@ export default function FeedPage ({user}: {user: UserType}) {
         (feed.warnUserIds.length === 0 || !(feed.warnUserIds as number[]).includes(user.id))
     )
 
-    alert('filteredData: ' + data.length + JSON.stringify(data))
+    alert('filteredData: ' + filteredData.length + JSON.stringify(data))
 
     if(filteredData.length === 0) return <NoFeedPage />
 
