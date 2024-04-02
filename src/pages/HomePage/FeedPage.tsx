@@ -15,8 +15,6 @@ export default function FeedPage ({user}: {user: UserType}) {
     const {data} = useRecommendFeeds(user) 
     const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
-    alert('useRecommendFeeds(user)Data: ' + data.length + JSON.stringify(data))
-
     if(data.length === 0) return <NoFeedPage />
 
     const filteredData = data.filter(feed => {
@@ -29,8 +27,6 @@ export default function FeedPage ({user}: {user: UserType}) {
             return true
         }
     )
-
-    alert('filteredData: ' + filteredData.length + JSON.stringify(filteredData))
 
     if(filteredData.length === 0) return <NoFeedPage />
 
