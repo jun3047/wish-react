@@ -7,6 +7,7 @@ import AlarmBox from '../../components/AlarmBox';
 import { AlarmType } from '../../types/alarm';
 import MainBtn from '../../components/MainBtn';
 import { useEffect } from 'react';
+import handleNative from '../../native';
 
 export default function AlarmPage ({
     user,
@@ -30,7 +31,9 @@ export default function AlarmPage ({
                     />
                 ))
             }
-            <MainBtn onClick={() => {}}>누군지 확인하기</MainBtn>
+            <MainBtn onClick={() => {
+                handleNative('인스타프로필', 'wishappteam')
+            }}>누군지 확인하기</MainBtn>
         </AlarmContainer>
     );
 }

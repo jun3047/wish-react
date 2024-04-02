@@ -76,7 +76,7 @@ const MyMenu = () => {
     const items: MenuProps['items'] = [
       {key: '1', label: ( <a onClick={(e) => {
         e.stopPropagation()
-
+        handleNative('인스타프로필', 'wishappteam')
       }}>문의하기</a> )},
       {key: '2', label: ( <a onClick={(e) => {
         e.stopPropagation()
