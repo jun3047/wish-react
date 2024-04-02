@@ -95,7 +95,7 @@ const MyMenu = () => {
         e.stopPropagation()
         changeAlarmGrant()
       }}>알림 {alarmGrant ? '켜기' : '끄기'}</a> )},
-      {key: '6', label: ( <a onClick={(e) => {
+      {key: '4', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
         setUser({
@@ -114,25 +114,7 @@ const MyMenu = () => {
 
         alert('user.friends' + JSON.stringify(user.friends))
       }}>user.friends에 12명 추가</a> )},
-      {key: '4', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        alert('user.alarms' + JSON.stringify(user.alarms))
-      }}>user.alarms 확인</a> )},
-      {key: '7', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        setUser({
-            ...user,
-            feedIds: [2,3]
-        })
-        alert('user.feedIds' + JSON.stringify(user.feedIds))
-      }}>user.feedIds 추가</a> )},
       {key: '5', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        alert('user.receivedFriends' + JSON.stringify(user.receivedFriends))
-        alert('user.friends' + JSON.stringify(user.friends))
-        alert('user.requestFriends' + JSON.stringify(user.requestFriends))
-      }}>user의 friend관련  확인</a> )},
-      {key: '8', label: ( <a onClick={(e) => {
         e.stopPropagation()
         setUser({
             ...user,
@@ -141,10 +123,6 @@ const MyMenu = () => {
             receivedFriends: []
         })
       }}>친구 관련 사항 삭제하기</a> )},
-      {key: '9', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        alert('alarm' + JSON.stringify(alarmGrant))
-      }}>alarm 권한 확인</a> )},
     ]
 
       return (
