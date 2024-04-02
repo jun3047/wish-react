@@ -81,7 +81,11 @@ const MyMenu = () => {
       {key: '2', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
-        if(!window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')) return
+        const res = window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')
+        // 빨간 버튼으로 탈퇴하기 만들기
+        
+
+        if(!res) return
 
         setUser(null)
         setPoll(null)

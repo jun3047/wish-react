@@ -16,7 +16,9 @@ const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {
           <ProfileIcon gender = {asker.gender}/>
           <QuestionDetails>
             <QuestionText>{question}</QuestionText>
-            <MutualFriendsText>{asker.school}에 다니는 {asker.age}살</MutualFriendsText>
+            {
+              asker.school === undefined ? null : <MutualFriendsText>{asker.school}에 다니는 {asker.age}살</MutualFriendsText>
+            }
           </QuestionDetails>
           <div style={{ flex: 1 }} />
           <CameraIcon
@@ -61,6 +63,7 @@ const QuestionDetails = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4px;
+    max-width: calc(95% - 80px);
 `;
 
 const QuestionText = styled.p`
