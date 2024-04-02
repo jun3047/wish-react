@@ -20,6 +20,8 @@ const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {
           </QuestionDetails>
           <div style={{ flex: 1 }} />
           <CameraIcon
+            width={24}
+            height={24}
             onClick={(e) => {
               e.stopPropagation();
               handleNative('카메라', JSON.stringify({
