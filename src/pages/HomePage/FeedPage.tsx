@@ -12,10 +12,10 @@ import { useState } from "react"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
-    const {data} = useRecommendFeeds(user)
+    const {data} = useRecommendFeeds(user) 
     const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
-    alert('useRecommendFeeds(user)Data: ' + JSON.stringify(data))
+    alert('useRecommendFeeds(user)Data: ' + data.length + JSON.stringify(data))
 
     if(data.length === 0) return <NoFeedPage />
 
@@ -25,7 +25,7 @@ export default function FeedPage ({user}: {user: UserType}) {
         (feed.warnUserIds.length === 0 || !(feed.warnUserIds as number[]).includes(user.id))
     )
 
-    alert('filteredData: ' + JSON.stringify(data))
+    alert('filteredData: ' + data.length + JSON.stringify(data))
 
     if(filteredData.length === 0) return <NoFeedPage />
 
