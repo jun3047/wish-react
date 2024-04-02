@@ -9,6 +9,7 @@ import { Dropdown, MenuProps } from 'antd';
 import usePoll from '../../hooks/usePoll';
 import handleNative from '../../native';
 import makeUserSimple from '../../utils/makeUserSimple';
+import useGrant from '../../hooks/useGrant';
 
 export default function MyPage () {
 
@@ -68,6 +69,7 @@ const MyMenu = () => {
   
     const [user, setUser] = useUser()
     const [poll, setPoll] = usePoll()
+    const [alarmGrant, changeAlarmGrant] = useGrant()
   
     if(!user) return null
   
@@ -76,6 +78,21 @@ const MyMenu = () => {
         e.stopPropagation()
 
       }}>문의하기</a> )},
+      {key: '2', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+
+        if(!window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')) return
+
+        setUser(null)
+        setPoll(null)
+        window.localStorage.removeItem('userInfo')
+        window.localStorage.removeItem('pollInfo')
+        handleNative('초기화')
+      }}>탈퇴하기</a> )},
+      {key: '3', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+        changeAlarmGrant()
+      }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
       {key: '6', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
@@ -113,7 +130,7 @@ const MyMenu = () => {
         alert('user.friends' + JSON.stringify(user.friends))
         alert('user.requestFriends' + JSON.stringify(user.requestFriends))
       }}>user의 friend관련  확인</a> )},
-      {key: '3', label: ( <a onClick={(e) => {
+      {key: '8', label: ( <a onClick={(e) => {
         e.stopPropagation()
         setUser({
             ...user,
@@ -122,17 +139,10 @@ const MyMenu = () => {
             receivedFriends: []
         })
       }}>친구 관련 사항 삭제하기</a> )},
-      {key: '2', label: ( <a onClick={(e) => {
+      {key: '9', label: ( <a onClick={(e) => {
         e.stopPropagation()
-
-        if(!window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')) return
-
-        setUser(null)
-        setPoll(null)
-        window.localStorage.removeItem('userInfo')
-        window.localStorage.removeItem('pollInfo')
-        handleNative('초기화')
-      }}>탈퇴하기</a> )}
+        alert('alarm' + JSON.stringify(alarmGrant))
+      }}>alarm 권한 확인</a> )},
     ]
 
       return (
