@@ -17,8 +17,10 @@ const useGrant = () => {
     useEffect(() => {
         const loadAlarmInfo = () => {
             const alarmGrant = window.localStorage.getItem(GRANT_KEY);
-            if (alarmGrant) setAlarm(JSON.parse(alarmGrant));
-            else {
+            if (alarmGrant) {
+                setAlarm(JSON.parse(alarmGrant));
+                alert('alarmGrant' + JSON.stringify(alarmGrant))
+            } else {
                 setAlarm(initValue);
                 window.localStorage.setItem(GRANT_KEY, JSON.stringify({alarm:initValue}));
             }
@@ -32,7 +34,6 @@ const useGrant = () => {
         const alarmDataString = JSON.stringify({ alarm: !alarm });
         window.localStorage.setItem(GRANT_KEY, alarmDataString);
         setAlarm(!alarm);
-
         handleNative(ALARM_GRANT_CHANGE_ACTION);
     };
 
