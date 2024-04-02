@@ -18,13 +18,13 @@ export default function FeedPage ({user}: {user: UserType}) {
     if(data.length === 0) return <NoFeedPage />
 
     const filteredData = data.filter(feed => {
-            if(warnFeedIds.includes(feed.id)) return true
-            if(feed.writer.id === user.id) return true
+            if(warnFeedIds.includes(feed.id)) return false
+            if(feed.writer.id === user.id) return false
             
-            if(feed.warnUserIds.length === 0) return false
-            if((feed.warnUserIds as number[]).includes(user.id)) return true
+            if(feed.warnUserIds.length === 0) return true
+            if((feed.warnUserIds as number[]).includes(user.id)) return false
 
-            return true
+            return false
         }
     )
 
