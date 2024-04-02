@@ -82,8 +82,6 @@ const MyMenu = () => {
         e.stopPropagation()
 
         const res = window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')
-        // 빨간 버튼으로 탈퇴하기 만들기
-        
 
         if(!res) return
 
@@ -96,7 +94,7 @@ const MyMenu = () => {
       {key: '3', label: ( <a onClick={(e) => {
         e.stopPropagation()
         changeAlarmGrant()
-      }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
+      }}>알림 {alarmGrant ? '켜기' : '끄기'}</a> )},
       {key: '6', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
