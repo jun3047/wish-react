@@ -23,6 +23,10 @@ export default function AlarmPage ({
         <AlarmContainer>
             <AlarmBigText>알람</AlarmBigText>
             <MainBtn onClick={() => {
+
+                const res = window.confirm('확인을 위해 wish 공식 인스타로 이동합니다')
+                if(!res) return;
+
                 handleNative('인스타프로필', 'wishappteam')
             }}>누군지 확인하기</MainBtn>
             {
