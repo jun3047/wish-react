@@ -80,6 +80,8 @@ const usePoll = () => {
             question: '',
             nextTime: ''
         }, false)
+
+        alert('투표를 받은 유저는 기본적으로 익명으로 보게 되지만, \n 낮은 확률로 보낸 이의 이름을 확인할 수도 있습니다.')
     }
 
     const scheduleNextPoll = () => {

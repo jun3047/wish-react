@@ -30,7 +30,7 @@ export default function PollPage () {
         <MainContainer>
             <PollPageContainer>
                 <Logo>WISH</Logo>
-                <SubText>오늘의 주제</SubText>
+                <SubText>주제</SubText>
                 {
                     divideTwoLines(poll.question).map((line, index) => (
                         <SubjectText key={index}>{line}</SubjectText>
