@@ -18,10 +18,7 @@ interface FeedApiType {
 
 const feedApi: FeedApiType = {
   postFeed: feedInfo => request.post('/feed', feedInfo),
-  getRecommendFeeds: userInfo => {
-    alert('feedApi.ts' + JSON.stringify(userInfo));
-    return request.post(`/feed/recommend`, userInfo)
-  },
+  getRecommendFeeds: userInfo => request.post(`/feed/recommend`, userInfo),
   getFeeds: feedIds => request.post(`/feeds`, feedIds),
   warnFeed: (userId, feedId) => request.put(`/feed/warn`, {userId, feedId})
 };
