@@ -114,15 +114,6 @@ const MyMenu = () => {
 
         alert('user.friends' + JSON.stringify(user.friends))
       }}>user.friends에 12명 추가</a> )},
-      {key: '5', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        setUser({
-            ...user,
-            friends: [],
-            requestFriends: [],
-            receivedFriends: []
-        })
-      }}>친구 관련 사항 삭제하기</a> )},
     ]
 
       return (
