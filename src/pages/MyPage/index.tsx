@@ -103,10 +103,10 @@ const MyMenu = () => {
             friends: [
                 ...user.friends,
                 ...Array.from({length: 12}, (_, index) => {
-                    
                     return {
                         ...makeUserSimple(user),
                         id: index,
+                        feedIds: [1,2,3],
                     }
                 },)
             ],
