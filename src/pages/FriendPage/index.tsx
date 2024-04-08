@@ -33,10 +33,10 @@ export default function FriendPage ({
 
     return (
         <MainContainer>
-            <FriendSection
+            {/* <FriendSection
                 title={'신규 요청'}
                 data={user.receivedFriends}
-            />
+            /> */}
             <FriendSection
                 title={'학교 친구들'}
                 data={FilterData}

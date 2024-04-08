@@ -61,11 +61,12 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
             <MutualFriends>{item.age}살 {item.school}</MutualFriends>
           </FriendInfo>
           <div style={{ flex: 1 }} />
-          {title === '신규 요청' ? (
+          <BeFriendButton onClick={() => beFriend(item)} />
+          {/* {title === '신규 요청' ? (
             <BeFriendButton onClick={() => beFriend(item)} />
           ) : (
             <AddFriendButton onClick={() => addFriend(item)} />
-          )}
+          )} */}
         </FriendItem>
       ))}
       {maxDisplayCount < data.length && <MoreButton onClick={handleShowMore}>더보기</MoreButton>}
