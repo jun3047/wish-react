@@ -95,25 +95,25 @@ const MyMenu = () => {
         e.stopPropagation()
         changeAlarmGrant()
       }}>알림 {alarmGrant ? '켜기' : '끄기'}</a> )},
-      {key: '4', label: ( <a onClick={(e) => {
-        e.stopPropagation()
+    //   {key: '4', label: ( <a onClick={(e) => {
+    //     e.stopPropagation()
 
-        setUser({
-            ...user,
-            friends: [
-                ...user.friends,
-                ...Array.from({length: 12}, (_, index) => {
-                    return {
-                        ...makeUserSimple(user),
-                        id: index,
-                        feedIds: [1,2,3],
-                    }
-                },)
-            ],
-        })
+    //     setUser({
+    //         ...user,
+    //         friends: [
+    //             ...user.friends,
+    //             ...Array.from({length: 12}, (_, index) => {
+    //                 return {
+    //                     ...makeUserSimple(user),
+    //                     id: index,
+    //                     feedIds: [1,2,3],
+    //                 }
+    //             },)
+    //         ],
+    //     })
 
-        alert('user.friends' + JSON.stringify(user.friends))
-      }}>user.friends에 12명 추가</a> )},
+    //     alert('user.friends' + JSON.stringify(user.friends))
+    //   }}>user.friends에 12명 추가</a> )},
     ]
 
       return (
