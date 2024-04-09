@@ -27,7 +27,7 @@ const FriendSection: React.FC<FriendSectionProps> = ({ title, data }) => {
 
   const beFriend = async (targetUser: SimpleUserType) => {
     friendApi.beFriend(makeUserSimple(user), targetUser)
-    pushApi.reciveFriend(user, targetUser.token)
+    pushApi.reciveFriend(makeUserSimple(user), targetUser.token)
 
     setUser({
         ...user,
@@ -91,7 +91,8 @@ const BeFriendButton = ({onClick}: {
   return <ActionButton onClick={(e)=>{
     e.stopPropagation()
     onClick()
-  }}>수락</ActionButton>;
+  }}>친구 추가</ActionButton>;
+  // }}>수락</ActionButton>;
 };
 
 const Container = styled.div`
