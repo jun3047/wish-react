@@ -4,6 +4,7 @@ import { AlarmType } from "../types/alarm"
 import { ReactComponent as CameraIcon } from "../images/assets/camera.svg"
 import makeUserSimple from "../utils/makeUserSimple"
 import { UserType } from "../types/user"
+import { trackEvent } from "../apis/logging/amplitude"
 
 const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {
 
@@ -26,6 +27,9 @@ const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {
             height={24}
             onClick={(e) => {
               e.stopPropagation();
+
+              const isSameGender = asker.gender === user.gender ? 'same' : 'other';
+              trackEvent(`view_alarmDetail-${isSameGender}`)
               handleNative('카메라', JSON.stringify({
                 asker: asker,
                 question: question,

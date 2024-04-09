@@ -5,6 +5,7 @@ import FeedPage from './FeedPage';
 import PollPage from './PollPage';
 import handleNative from '../../native';
 import MainBtn from '../../components/MainBtn';
+import { trackEvent } from '../../apis/logging/amplitude';
 
 const MIN_FRIENDS = 4
 
@@ -33,6 +34,7 @@ export default function HomePage () {
 const NoFirendPage = () => {
 
     const goToFriendPage = () => {
+        trackEvent('click_go2Friend')
         handleNative('탭이동', 'friend')
     }
 

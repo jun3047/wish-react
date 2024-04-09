@@ -5,10 +5,11 @@ import useUser from "../../hooks/useUser"
 import MainBtn from "../../components/MainBtn"
 import divideTwoLines from "../../utils/divideTwoLines"
 import { SimpleUserType, UserType } from "../../types/user"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ReactComponent as RefreshIcon } from '../../images/assets/refresh.svg';
 import { pushApi } from "../../apis"
 import makeUserSimple from "../../utils/makeUserSimple"
+import { trackEvent } from "../../apis/logging/amplitude"
 
 export default function PollPage () {
 
@@ -22,6 +23,8 @@ export default function PollPage () {
     const pollFriend = (friend: SimpleUserType | null) => {
 
         if(!friend) return;
+
+        trackEvent('click_sendQ')
         pushApi.poll(makeUserSimple(user), friend.token, poll.question)
         scheduleNextPoll()
     }

@@ -1,7 +1,4 @@
-import { userState } from "../recoils"
 import { useEffect, useState } from "react"
-import { useRecoilState } from "recoil"
-import { UserType } from "../types/user";
 
 // @ts-ignore
 const handleNative = (type: string) => window.ReactNativeWebView.postMessage(type);

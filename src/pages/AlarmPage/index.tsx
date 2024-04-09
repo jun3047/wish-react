@@ -1,13 +1,10 @@
 import styled from '@emotion/styled'
-import useUser from '../../hooks/useUser';
 import { UserType } from '../../types/user';
-import makeUserSimple from '../../utils/makeUserSimple';
 import { MainContainer, NoPageContainer, NoText } from '../HomePage';
 import AlarmBox from '../../components/AlarmBox';
-import { AlarmType } from '../../types/alarm';
 import MainBtn from '../../components/MainBtn';
-import { useEffect } from 'react';
 import handleNative from '../../native';
+import { trackEvent } from '../../apis/logging/amplitude';
 
 export default function AlarmPage ({
     user,
@@ -24,9 +21,11 @@ export default function AlarmPage ({
             <AlarmBigText>알람</AlarmBigText>
             <MainBtn onClick={() => {
 
+                trackEvent('click_showWho')
                 const res = window.confirm('확인을 위해 wish 공식 인스타로 이동합니다')
                 if(!res) return;
 
+                trackEvent('click_Insta')
                 handleNative('인스타프로필', 'wishappteam')
             }}>누군지 확인하기</MainBtn>
             {

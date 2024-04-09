@@ -3,12 +3,10 @@ import useUser from '../../hooks/useUser';
 import { Logo, MainContainer, NoPageContainer, NoText } from '../HomePage';
 import FeedCard from '../../components/FeedCard';
 import useFeeds from '../../apis/queries/useFeeds';
-import MainBtn from '../../components/MainBtn';
 import { ReactComponent as OptionIcon } from '../../images/assets/option.svg';
 import { Dropdown, MenuProps } from 'antd';
 import usePoll from '../../hooks/usePoll';
 import handleNative from '../../native';
-import makeUserSimple from '../../utils/makeUserSimple';
 import useGrant from '../../hooks/useGrant';
 
 export default function MyPage () {

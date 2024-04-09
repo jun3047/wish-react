@@ -1,11 +1,8 @@
 import styled from '@emotion/styled'
 import useRecommendFriends from '../../apis/queries/useRecommendFriends';
 import { SimpleUserType, UserType } from '../../types/user';
-import { friendApi } from '../../apis';
-import makeUserSimple from '../../utils/makeUserSimple';
 import FriendSection from '../../components/FriendSection';
-import { Logo, NoPageContainer, NoText } from '../HomePage';
-import { useEffect } from 'react';
+import { NoPageContainer, NoText } from '../HomePage';
 
 export default function FriendPage ({
     user,

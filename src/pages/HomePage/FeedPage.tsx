@@ -1,14 +1,11 @@
-import styled from "@emotion/styled"
 import { Logo, MainContainer, NoPageContainer, NoText } from "."
 import useRecommendFeeds from "../../apis/queries/useRecommendFeeds"
 import handleNative from "../../native"
 import { UserType } from "../../types/user"
 import MainBtn from "../../components/MainBtn"
-import { FeedType } from "../../types/feed"
 import FeedCard from "../../components/FeedCard"
-import { css } from '@emotion/react';
-import makeUserSimple from "../../utils/makeUserSimple"
 import { useState } from "react"
+import { trackEvent } from "../../apis/logging/amplitude"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
@@ -47,6 +44,7 @@ export default function FeedPage ({user}: {user: UserType}) {
 const NoFeedPage = () => {
 
     const goToAlarmPage = () => {
+        trackEvent('click_go2Alarm')
         handleNative('탭이동', 'alarm')
     }
 

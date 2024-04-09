@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil"
 import { PollType } from "../types/poll";
 import randomQuestion from "../pages/HomePage/PollData";
 import handleNative from "../native";
+import { trackEvent } from "../apis/logging/amplitude";
 
 const POLL_INFO_KEY = 'pollInfo';
 const APP_SYNC_ACTION = '앱동기화';
@@ -81,7 +82,9 @@ const usePoll = () => {
             nextTime: ''
         }, false)
 
-        alert('투표를 받은 유저는 기본적으로 익명으로 보게 되지만, \n 낮은 확률로 보낸 이의 이름을 확인할 수도 있습니다.')
+        trackEvent('click_initQ')
+
+        alert('투표를 받은 유저는 기본적으로 익명으로 보게 되지만, 낮은 확률로 보낸 이의 이름을 확인할 수도 있습니다.')
     }
 
     const scheduleNextPoll = () => {
