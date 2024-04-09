@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import useUser from '../../hooks/useUser';
-import { friendApi, userApi } from '../../apis';
+import { friendApi, pushApi, userApi } from '../../apis';
 import { useEffect, useState } from 'react';
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { Logo, MainContainer, NoPageContainer, NoText } from '../HomePage';
 import FeedCard from '../../components/FeedCard';
 import { FeedType } from '../../types/feed';
 import makeUserSimple from '../../utils/makeUserSimple';
-import { UserType } from '../../types/user';
+import { SimpleUserType, UserType } from '../../types/user';
 import useFeeds from '../../apis/queries/useFeeds';
 import MainBtn from '../../components/MainBtn';
 
@@ -21,8 +21,23 @@ export default function ProfilePage () {
     
     const {data} = useProfile(id)
 
+    if(!user) return <Logo>대기중</Logo>
+
     const warnFeed = (feedId: number) => {
         setWarnFeedIds([...warnFeedIds, feedId])
+    }
+
+    const beFriend = async (targetUser: SimpleUserType) => {
+        friendApi.beFriend(makeUserSimple(user), targetUser)
+        pushApi.reciveFriend(makeUserSimple(user), targetUser.token)
+
+        setUser({
+            ...user,
+            friends: !user?.friends?.length ?
+            [targetUser]:
+            [...user.friends, targetUser],
+            receivedFriends: user.receivedFriends.filter(friend => friend.id !== targetUser.id)
+        })
     }
     
     if(!user) return <Logo>대기중</Logo>
@@ -56,7 +71,9 @@ export default function ProfilePage () {
                 :
                 <NoUserFeed />
                 :
-                <AddFriend />
+                <AddFriend
+                    onClick={()=>beFriend(data)}
+                />
             }
         </MainContainer>
     );
@@ -98,12 +115,14 @@ const NoUserFeed = () => {
     )
 }
 
-const AddFriend = () => {
+const AddFriend = ({onClick}: {
+    onClick: () => void;
+}) => {
 
     return (
         <CustomNoPage>
             <NoText>친구가 되면 볼 수 있어요</NoText>
-            <MainBtn>친구 추가</MainBtn>
+            <MainBtn onClick={onClick}>친구 추가</MainBtn>
         </CustomNoPage>
     )
 }
