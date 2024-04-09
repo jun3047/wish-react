@@ -80,6 +80,11 @@ const MyMenu = () => {
       }}>문의하기</a> )},
       {key: '2', label: ( <a onClick={(e) => {
         e.stopPropagation()
+        changeAlarmGrant()
+      }}>알림 {!alarmGrant ? '끄기' : '켜기'}</a> )},
+
+      {key: '3', label: ( <a onClick={(e) => {
+        e.stopPropagation()
 
         const res = window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')
 
@@ -91,14 +96,6 @@ const MyMenu = () => {
         window.localStorage.removeItem('pollInfo')
         handleNative('초기화')
       }}>탈퇴하기</a> )},
-      {key: '3', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        changeAlarmGrant()
-      }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
-      {key: '4', label: ( <a onClick={(e) => {
-        e.stopPropagation()
-        alert(JSON.stringify(user.friends))
-      }}>user.friends 보기</a> )},
     ]
 
       return (
