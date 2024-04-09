@@ -94,26 +94,11 @@ const MyMenu = () => {
       {key: '3', label: ( <a onClick={(e) => {
         e.stopPropagation()
         changeAlarmGrant()
-      }}>알림 {alarmGrant ? '켜기' : '끄기'}</a> )},
-    //   {key: '4', label: ( <a onClick={(e) => {
-    //     e.stopPropagation()
-
-    //     setUser({
-    //         ...user,
-    //         friends: [
-    //             ...user.friends,
-    //             ...Array.from({length: 12}, (_, index) => {
-    //                 return {
-    //                     ...makeUserSimple(user),
-    //                     id: index,
-    //                     feedIds: [1,2,3],
-    //                 }
-    //             },)
-    //         ],
-    //     })
-
-    //     alert('user.friends' + JSON.stringify(user.friends))
-    //   }}>user.friends에 12명 추가</a> )},
+      }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
+      {key: '4', label: ( <a onClick={(e) => {
+        e.stopPropagation()
+        alert(JSON.stringify(user.friends))
+      }}>user.friends 보기</a> )},
     ]
 
       return (
