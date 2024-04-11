@@ -80,7 +80,11 @@ const MyMenu = () => {
         e.stopPropagation()
         changeAlarmGrant()
       }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
-      {key: '3', label: ( <a onClick={(e) => {
+      {key: '3', label: ( <a href='https://jun3047.notion.site/WISH-f3b840b5dab64244ba6f5771c06ddcb4?pvs=4'
+        target='_blank' rel='noreferrer' onClick={(e) => {
+            e.stopPropagation()
+      }}>서비스 이용약관 및 개인정보 수집 동의 보기</a> )},
+      {key: '4', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
         const res = window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')
