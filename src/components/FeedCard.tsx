@@ -49,10 +49,10 @@ const FeedMenu = ({feed, warnFeed}: {
       e.stopPropagation()
 
       if(feed.writer.id === user.id) return alert('자신의 게시물은 신고할 수 없습니다.')
-      if(!window.confirm('정말 신고하시겠습니까?')) return
+      if(!window.confirm('정말 신고하시겠습니까? 누적 신고 3번 이상된 유저는 더 글을 올릴 수 없게 됩니다.')) return
       
       feedApi.warnFeed(user.id, feed.id)
-      .then(() => alert('신고가 완료되었습니다.'))
+      .then(() => alert('신고가 완료되었습니다. 24시간 내에 조치될 예정입니다.'))
       .catch(() => alert('이미 신고한 게시물입니다.'))
       
       const isMyFeed = warnFeed === undefined
