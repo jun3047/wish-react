@@ -80,7 +80,6 @@ const MyMenu = () => {
         e.stopPropagation()
         changeAlarmGrant()
       }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
-
       {key: '3', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
@@ -90,6 +89,7 @@ const MyMenu = () => {
 
         setUser(null)
         setPoll(null)
+        window.localStorage.removeItem('grant')
         window.localStorage.removeItem('userInfo')
         window.localStorage.removeItem('pollInfo')
         handleNative('초기화')
