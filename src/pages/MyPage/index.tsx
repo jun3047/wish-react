@@ -75,7 +75,7 @@ const MyMenu = () => {
       {key: '1', label: ( <a onClick={(e) => {
         e.stopPropagation()
         handleNative('인스타프로필', 'wishappteam')
-      }}>문의하기</a> )},
+      }}>공식 인스타 방문하기</a> )},
       {key: '2', label: ( <a onClick={(e) => {
         e.stopPropagation()
         changeAlarmGrant()
@@ -85,6 +85,10 @@ const MyMenu = () => {
             e.stopPropagation()
       }}>서비스 이용약관 및 개인정보 수집 동의 보기</a> )},
       {key: '4', label: ( <a onClick={(e) => {
+            e.stopPropagation()
+            alert('아래 이메일로 문의해주세요\njungjun3047@naver.com')
+      }}>문의하기</a> )},
+      {key: '5', label: ( <a onClick={(e) => {
         e.stopPropagation()
 
         const res = window.confirm('정말 탈퇴하시겠습니까? \n 되돌릴 수 없습니다')
