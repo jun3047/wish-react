@@ -80,9 +80,9 @@ const MyMenu = () => {
         e.stopPropagation()
         changeAlarmGrant()
       }}>알림 {alarmGrant ? '끄기' : '켜기'}</a> )},
-      {key: '3', label: ( <a href='https://jun3047.notion.site/WISH-f3b840b5dab64244ba6f5771c06ddcb4?pvs=4'
-        target='_blank' rel='noreferrer' onClick={(e) => {
+      {key: '3', label: ( <a onClick={(e) => {
             e.stopPropagation()
+            handleNative('이용약관')
       }}>서비스 이용약관 및 개인정보 수집 동의 보기</a> )},
       {key: '4', label: ( <a onClick={(e) => {
             e.stopPropagation()
