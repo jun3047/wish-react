@@ -9,7 +9,6 @@ import getRelationById from "../utils/getRelationById";
 
 const FeedCard = ({ feed, warnFeed }: { feed: FeedType, warnFeed?: (feedId: number) => void }) => {
 
-
     const goToProfile = (id: number) => {
         handleNative('프로필이동', id.toString())
     }

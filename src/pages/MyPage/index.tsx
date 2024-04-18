@@ -83,7 +83,7 @@ const MyMenu = () => {
       {key: '3', label: ( <a onClick={(e) => {
             e.stopPropagation()
             handleNative('이용약관')
-      }}>서비스 이용약관 및 개인정보 수집 동의 보기</a> )},
+      }}>약관보기</a> )},
       {key: '4', label: ( <a onClick={(e) => {
             e.stopPropagation()
             alert('아래 이메일로 문의해주세요\njungjun3047@naver.com')

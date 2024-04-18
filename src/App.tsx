@@ -2,9 +2,8 @@ import { Suspense } from 'react';
 import Router from './routes/Router';
 import { RecoilRoot } from 'recoil';
 import { GlobalStyle } from './styles';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { Logo } from './pages/HomePage';
-
 
 const queryClient = new QueryClient();
 

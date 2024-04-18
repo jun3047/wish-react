@@ -14,7 +14,7 @@ const Router = () => {
 
   const [user, setUser] = useUser()
 
-  const updateUser = (userInfo: UserType) =>  setUser(userInfo)
+  const updateUser = (userInfo: UserType) => setUser(userInfo)
 
   if(!user) return <div>대기중</div>
 
