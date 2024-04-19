@@ -56,7 +56,10 @@ const useSyncData = <T>(atomKey: string, storageKey: string, initValue: any) => 
 
         if(fromApp) return;
 
-        handleNative(`${APP_SYNC_ACTION}${newDataString}`);
+        const newDataObejct = {
+            [storageKey]: newData
+        };
+        handleNative(`${APP_SYNC_ACTION}${JSON.stringify(newDataObejct)}`);
     };
 
     return [data, updateData] as const;
