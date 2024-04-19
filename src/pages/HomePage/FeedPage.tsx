@@ -6,8 +6,8 @@ import MainBtn from "../../components/MainBtn"
 import FeedCard from "../../components/FeedCard"
 import { useState } from "react"
 import { trackEvent } from "../../apis/logging/amplitude"
-import ObserverTarget from "../../components/ObserverTarget"
-import { InfiniteQueryObserverResult } from "react-query"
+// import ObserverTarget from "../../components/ObserverTarget"
+// import { InfiniteQueryObserverResult } from "react-query"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
