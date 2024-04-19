@@ -10,6 +10,7 @@ import { ReactComponent as RefreshIcon } from '../../images/assets/refresh.svg';
 import { pushApi } from "../../apis"
 import makeUserSimple from "../../utils/makeUserSimple"
 import { trackEvent } from "../../apis/logging/amplitude"
+import handleNative from "../../native"
 
 export default function PollPage () {
 
@@ -25,6 +26,7 @@ export default function PollPage () {
         if(!friend) return;
 
         trackEvent('click_sendQ')
+        handleNative('진동')
         pushApi.poll(makeUserSimple(user), friend.token, poll.question)
         scheduleNextPoll()
     }
@@ -83,7 +85,10 @@ const PollButtonGrid = ({
             }
         </GridContainer>
         <RefreshButton 
-            useRefresh={()=>setRefreshNum(refreshNum-1)} 
+            useRefresh={()=>{
+                handleNative('진동')
+                setRefreshNum(refreshNum-1)
+            }} 
             active={refreshNum !== 0}
         />
         </>
