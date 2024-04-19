@@ -22,6 +22,8 @@ export default function AlarmPage ({
             <MainBtn onClick={() => {
 
                 trackEvent('click_showWho')
+                handleNative('진동')
+                
                 const res = window.confirm('확인을 위해 wish 공식 인스타로 이동합니다')
                 if(!res) return;
 
