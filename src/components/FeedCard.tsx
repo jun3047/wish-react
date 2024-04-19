@@ -6,19 +6,29 @@ import { Dropdown, Menu, MenuProps } from "antd";
 import { feedApi, friendApi, pushApi } from "../apis";
 import useUser from "../hooks/useUser";
 import getRelationById from "../utils/getRelationById";
+import { useState } from "react";
 
 const FeedCard = ({ feed, warnFeed }: { feed: FeedType, warnFeed?: (feedId: number) => void }) => {
 
     const goToProfile = (id: number) => {
         handleNative('프로필이동', id.toString())
     }
-    
+
+    const [imgLoading, setImgLoading] = useState(true)
+
     return (
       <CardContainer>
         <QuestionText>익명에게 받은 질문</QuestionText>
         <FeedQuestion>{feed.question}</FeedQuestion>
         <ImageContainer>
-          <Image src={feed.imgUrl} alt="feed" />
+          { imgLoading && <SkeletonImage /> }
+          <Image 
+            src={feed.imgUrl}
+            alt="feed"
+            onLoad={()=>{
+              setImgLoading(false)
+            }}
+          />
         </ImageContainer>
         <ProfileContainer onClick={() => goToProfile(feed.writer.id)}>
           <ProfileImage />
@@ -134,12 +144,28 @@ const CardContainer = styled.div`
   align-items: center;
   padding: 0 30px;
   margin: 16px 0;
+  width: 100%;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+const SkeletonImage = styled(Image)`
+  background-color: #717171;
+  animation: pulse 1.5s infinite alternate;
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;
+
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -160,6 +186,8 @@ const FeedQuestion = styled(QuestionText)`
 `;
 
 const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
   margin: 20px 0;
   overflow: hidden;
   border-radius: 30px;
