@@ -12,13 +12,24 @@ const AlarmBox = ({alarm, user} : {alarm: AlarmType, user: UserType}) => {
 
     const writer = makeUserSimple(user);
 
+    type Gender = '남자' | '여자';
+    const getOtherGender = (gender: Gender): Gender => gender === '남자' ? "여자" : "남자"
+
+    const displayAsker = asker.school === undefined ? {
+        age: writer.age,
+        gender: getOtherGender(writer.gender),
+        school: writer.school
+    }: asker
+
     return (
-        <AlarmContainer onClick={() => handleNative('알람', `${question},${asker.school},${asker.age},${asker.gender}`)}>
-          <ProfileIcon gender = {asker.gender}/>
+        <AlarmContainer onClick={() => handleNative('알람', `${question},${displayAsker.school},${displayAsker.age},${displayAsker.gender}`)}>
+          <ProfileIcon gender = {displayAsker.gender}/>
           <QuestionDetails>
             <QuestionText>{question}</QuestionText>
             {
-              asker.school === undefined ? null : <MutualFriendsText>{asker.school}에 다니는 {asker.age}살</MutualFriendsText>
+              displayAsker.school === undefined ? null 
+              
+              :<MutualFriendsText>{displayAsker.school}에 다니는 {displayAsker.age}살</MutualFriendsText>
             }
           </QuestionDetails>
           <div style={{ flex: 1 }} />
