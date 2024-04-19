@@ -1,4 +1,4 @@
-import { Logo, MainContainer, NoPageContainer, NoText } from "."
+import { FeedMainContainer, Logo, MainContainer, NoPageContainer, NoText } from "."
 import useRecommendFeeds from "../../apis/queries/useRecommendFeeds"
 import handleNative from "../../native"
 import { UserType } from "../../types/user"
@@ -6,13 +6,15 @@ import MainBtn from "../../components/MainBtn"
 import FeedCard from "../../components/FeedCard"
 import { useState } from "react"
 import { trackEvent } from "../../apis/logging/amplitude"
+import ObserverTarget from "../../components/ObserverTarget"
+import { InfiniteQueryObserverResult } from "react-query"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
-    const {data} = useRecommendFeeds(user) 
+    const { data } = useRecommendFeeds(user)
     const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
-    if(data.length === 0) return <NoFeedPage />
+    if(!data || data.length === 0) return <NoFeedPage />
 
     const filteredData = data.filter(feed => {
             if(warnFeedIds.includes(feed.id)) return false
@@ -30,14 +32,15 @@ export default function FeedPage ({user}: {user: UserType}) {
     const warnFeed = (feedId: number) => setWarnFeedIds([...warnFeedIds, feedId])
 
     return (
-        <MainContainer>
+        <FeedMainContainer>
             <Logo style={{position: 'relative', marginBottom: '20px'}}>WISH</Logo>
             {
                 filteredData.map(feed => (
                     <FeedCard key={feed.id} feed={feed} warnFeed={warnFeed}/>
                 ))
             }
-        </MainContainer>
+            {/* <ObserverTarget hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} /> */}
+        </FeedMainContainer>
     )
 }
 
