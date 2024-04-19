@@ -91,8 +91,18 @@ const NoPageContainer = styled.div`
 `
 
 const MainContainer = styled.div`
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+`
+
+const FeedMainContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
 
     display: flex;
     flex-direction: column;
@@ -103,6 +113,7 @@ const MainContainer = styled.div`
 export {
     Logo,
     MainContainer,
+    FeedMainContainer,
     NoText,
     NoPageContainer
 }
