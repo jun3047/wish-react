@@ -6,12 +6,11 @@ import MainBtn from "../../components/MainBtn"
 import FeedCard from "../../components/FeedCard"
 import { useState } from "react"
 import { trackEvent } from "../../apis/logging/amplitude"
-// import ObserverTarget from "../../components/ObserverTarget"
-// import { InfiniteQueryObserverResult } from "react-query"
+import ObserverTarget from "../../components/ObserverTarget"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
-    const { data } = useRecommendFeeds(user)
+    const { data, hasNextPage, fetchNextPage, refetch } = useRecommendFeeds(user)
     const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
     if(!data || data.length === 0) return <NoFeedPage />
@@ -39,7 +38,7 @@ export default function FeedPage ({user}: {user: UserType}) {
                     <FeedCard key={feed.id} feed={feed} warnFeed={warnFeed}/>
                 ))
             }
-            {/* <ObserverTarget hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} /> */}
+            <ObserverTarget hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
         </FeedMainContainer>
     )
 }

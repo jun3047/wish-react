@@ -11,14 +11,15 @@ interface FeedApiType {
     school?: string;
     schoolLocation?: string;
     friends: SimpleUserType[];
-  }) => Promise<AxiosResponse<FeedType[]>>;
+  }, lastFeedId?: number
+) => Promise<AxiosResponse<FeedType[]>>;
   getFeeds: (feedIds: number[]) => Promise<AxiosResponse<FeedType[]>>;
   warnFeed: (userId: number, feedId: number) => Promise<AxiosResponse>;
 }
 
 const feedApi: FeedApiType = {
   postFeed: feedInfo => request.post('/feed', feedInfo),
-  getRecommendFeeds: userInfo => request.post(`/feed/recommend`, userInfo),
+  getRecommendFeeds: (userInfo, lastFeedId) => request.post(`/feed/recommend`, {userInfo, lastFeedId}),
   getFeeds: feedIds => request.post(`/feeds`, feedIds),
   warnFeed: (userId, feedId) => request.put(`/feed/warn`, {userId, feedId})
 };
