@@ -11,9 +11,10 @@ import PullToRefreshContainer from "../../components/usePulltoRefresh"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
-    const { data, hasNextPage, fetchNextPage, refetch } = useRecommendFeeds(user)
+    const { data, hasNextPage, fetchNextPage, refetch, isFetching } = useRecommendFeeds(user)
     const [warnFeedIds, setWarnFeedIds] = useState<number[]>([])
 
+    if(!data || data.length === 0) return <LoadingPage />
     if(!data || data.length === 0) return <NoFeedPage />
 
     const filteredData = data.filter(feed => {
@@ -43,6 +44,19 @@ export default function FeedPage ({user}: {user: UserType}) {
                 <ObserverTarget hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
             </FeedMainContainer>
         </PullToRefreshContainer>
+    )
+}
+
+
+const LoadingPage = () => {
+
+    return (
+        <MainContainer>
+            <NoPageContainer>
+                <Logo>WISH</Logo>
+                <NoText>글을 가져오고 있어요</NoText>
+            </NoPageContainer>
+        </MainContainer>
     )
 }
 
