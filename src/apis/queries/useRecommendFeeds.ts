@@ -17,6 +17,12 @@ const useRecommendFeeds = (user: UserType) => {
         friends: user.friends ?? [],
     }
 
+    // return useSuspenseQuery({
+    //     queryKey: ['getRecommendFeeds'],
+    //     queryFn: () => feedApi.getRecommendFeeds(reqUserInfo),
+    //     select: (data) => data.data,
+    // })
+
     return useInfiniteQuery({
             queryKey: ['getRecommendFeeds'],
             queryFn: ({ pageParam }) => feedApi.getRecommendFeeds(reqUserInfo, pageParam),

@@ -7,6 +7,7 @@ import FeedCard from "../../components/FeedCard"
 import { useState } from "react"
 import { trackEvent } from "../../apis/logging/amplitude"
 import ObserverTarget from "../../components/ObserverTarget"
+import PullToRefreshContainer from "../../components/usePulltoRefresh"
 
 export default function FeedPage ({user}: {user: UserType}) {
 
@@ -31,15 +32,17 @@ export default function FeedPage ({user}: {user: UserType}) {
     const warnFeed = (feedId: number) => setWarnFeedIds([...warnFeedIds, feedId])
 
     return (
-        <FeedMainContainer>
-            <Logo style={{position: 'relative', marginBottom: '20px'}}>WISH</Logo>
-            {
-                filteredData.map(feed => (
-                    <FeedCard key={feed.id} feed={feed} warnFeed={warnFeed}/>
-                ))
-            }
-            <ObserverTarget hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
-        </FeedMainContainer>
+        <PullToRefreshContainer onRefresh={async () => {await refetch()}}>
+            <FeedMainContainer>
+                <Logo style={{position: 'relative', marginBottom: '20px'}}>WISH</Logo>
+                {
+                    filteredData.map(feed => (
+                        <FeedCard key={feed.id} feed={feed} warnFeed={warnFeed}/>
+                    ))
+                }
+                <ObserverTarget hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
+            </FeedMainContainer>
+        </PullToRefreshContainer>
     )
 }
 
