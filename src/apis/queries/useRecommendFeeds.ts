@@ -17,12 +17,6 @@ const useRecommendFeeds = (user: UserType) => {
         friends: user.friends ?? [],
     }
 
-    // return useSuspenseQuery({
-    //     queryKey: ['getRecommendFeeds'],
-    //     queryFn: () => feedApi.getRecommendFeeds(reqUserInfo),
-    //     select: (data) => data.data,
-    // })
-
     return useInfiniteQuery({
             queryKey: ['getRecommendFeeds'],
             queryFn: ({ pageParam }) => feedApi.getRecommendFeeds(reqUserInfo, pageParam),
@@ -32,10 +26,28 @@ const useRecommendFeeds = (user: UserType) => {
     });
 }
 
+
+const getRecommendFeedsApi = (user: UserType) => {
+
+    const reqUserInfo: {
+        school?: string | undefined,
+        schoolLocation?: string | undefined,
+        friends: SimpleUserType[],
+    } = {
+        school: user.school,
+        schoolLocation: user.schoolLocation,
+        friends: user.friends ?? [],
+    }
+
+    return feedApi.getRecommendFeeds(reqUserInfo)
+}
+
+
 const getNextPageParam = (lastPage: AxiosResponse<FeedType[], any>) => {
     return lastPage.data.length === 10 ?
         lastPage.data[lastPage.data.length - 1].id:
         undefined
 }
 
+export {getRecommendFeedsApi}
 export default useRecommendFeeds

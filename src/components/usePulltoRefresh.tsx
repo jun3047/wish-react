@@ -11,14 +11,12 @@ interface UsePullToRefreshOptions {
   onRefresh: () => Promise<void>;
 }
 
-// Spinner의 애니메이션 키프레임
 const spin = keyframes`
   to {
     transform: rotate(360deg);
   }
 `;
 
-// 동그랗게 도는 Spinner 스타일
 const Spinner = styled.div`
   border: 4px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;

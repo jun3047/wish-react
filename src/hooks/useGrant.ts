@@ -6,7 +6,7 @@ const handleNative = (type: string) => window.ReactNativeWebView.postMessage(typ
 const GRANT_KEY = 'grant';
 const ALARM_GRANT_CHANGE_ACTION = '알람권한변경';
 
-const initValue = true
+const initValue = true;
 
 const useGrant = () => {
     const [alarm, setAlarm] = useState<boolean>(initValue);

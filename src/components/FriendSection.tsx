@@ -91,7 +91,6 @@ const BeFriendButton = ({onClick}: {
     e.stopPropagation()
     onClick()
   }}>친구 추가</ActionButton>;
-  // }}>수락</ActionButton>;
 };
 
 const Container = styled.div`
