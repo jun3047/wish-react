@@ -2,13 +2,13 @@ import { PollType } from "../types/poll";
 import randomQuestion from "../pages/HomePage/PollData";
 import handleNative from "../native";
 import { trackEvent } from "../apis/logging/amplitude";
-import useSyncData from "./useSyncData";
+import useSyncWebData from "./useSyncWebData";
 
 const POLL_ATOM_KEY = 'pollState';
 const POLL_INFO_KEY = 'pollInfo';
 
 const usePoll = () => {
-    const [poll, updateData] = useSyncData<PollType>(POLL_ATOM_KEY, POLL_INFO_KEY, null);
+    const [poll, updateData] = useSyncWebData<PollType>(POLL_ATOM_KEY, POLL_INFO_KEY, null);
 
     const initPoll = () => {
         const newQuestion = randomQuestion("")

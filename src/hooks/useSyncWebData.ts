@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
-import { UserType } from "../types/user";
 
 const handleNative = (type: string) => window.ReactNativeWebView.postMessage(type);
 
 const APP_SYNC_ACTION = '앱동기화';
 
-const useSyncData = <T>(atomKey: string, storageKey: string, initValue: any) => {
+const useSyncWebData = <T>(atomKey: string, storageKey: string, initValue: any) => {
 
     const state = atom<T|null>({
         key: atomKey,
@@ -65,4 +64,4 @@ const useSyncData = <T>(atomKey: string, storageKey: string, initValue: any) => 
     return [data, updateData] as const;
 };
 
-export default useSyncData;
+export default useSyncWebData;
